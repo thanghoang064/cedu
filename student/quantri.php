@@ -1,0 +1,12 @@
+
+<?php
+include("controllers/c_user.php");
+$c_user=new C_user();
+
+//if(isset($_GET["func"]))
+//{
+//    $c_user->thoat_dang_nhap();
+//}
+$c_user->Show_student();
+//include('templates/layout.php');
+?>
