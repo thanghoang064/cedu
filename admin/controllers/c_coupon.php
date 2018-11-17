@@ -77,13 +77,13 @@ class C_coupon {
         if (isset($_POST["btnSave"])) {
 
             $ma_khuyen_mai = NULL;
-            $ten_khuyen_mai = $_POST['ten_khuyen_mai'];
+            $ten_khuyen_mai = str_replace(" ", "", $_POST['ten_khuyen_mai']) . time();
             $phan_tram_giam_gia =$_POST['phan_tram_giam_gia'];
             $ngay_bd = date_create($_POST["ngay_bat_dau"]);
             $ngay_bat_dau = date_format($ngay_bd, "Y-m-d");
 
             $ngay_kt = date_create($_POST["ngay_ket_thuc"]);
-            $ngay_ket_thuc = date_format($ngay_bd, "Y-m-d");
+            $ngay_ket_thuc = date_format($ngay_kt, "Y-m-d");
 
             $trang_thai = 1;
           //  $so_cho = $_POST['so_cho'];
@@ -118,54 +118,55 @@ class C_coupon {
         include('templates/layout.php');
 
     }
-    function Edit_class()
+    function Edit_coupon()
     {
 
         // Models
-        if(isset($_GET["ma_lop"]))
+        if(isset($_GET["ma_khuyen_mai"]))
         {
 
-            $ma_lop=$_GET["ma_lop"];
+            $ma_khuyen_mai = $_GET["ma_khuyen_mai"];
 
-            $m_class=new M_class();
+            $m_coupon =new M_coupon();
 
-            $class  =$m_class->read_class_by_idclass($ma_lop);
-            $m_teacher = new M_teacher();
-            $teachers = $m_teacher->read_teacher_active();
+                $coupon  =$m_coupon->Read_coupon_by_id($ma_khuyen_mai);
             // Cập nhật
             if(isset($_POST["btnSave"]))
             {
+               // $ma_khuyen_mai = NULL;
+                $ten_khuyen_mai = $_POST['ten_khuyen_mai'];
+                $phan_tram_giam_gia =$_POST['phan_tram_giam_gia'];
 
+                $ngay_bd = date_create($_POST["ngay_bat_dau"]);
+                $ngay_bat_dau = date_format($ngay_bd, "Y-m-d");
 
-                //    $ma_khoa_hoc, $ten_khoa_hoc, $ten_gv, $thoi_gian_hoc,$thong_tin_khoa_hoc,$ke_hoach_hoc_tap,$khoa_hoc_moi,$hinh,$don_gia,$ngay_tao
+                $ngay_kt = date_create($_POST["ngay_ket_thuc"]);
+                $ngay_ket_thuc = date_format($ngay_kt, "Y-m-d");
 
-                $ten_lop = $_POST['ten_lop'];
-                $ca_hoc =$_POST['ca_hoc'];
-                $ngay_bd = date_create($_POST["ngay_khai_giang"]);
-                $thoi_gian_khai_giang = date_format($ngay_bd, "Y-m-d");
-                $dia_diem_hoc = $_POST['dia_diem_hoc'];
-                $ma_khoa_hoc = $_POST['ma_khoa_hoc'];
-                $ma_gv = $_POST['ten_gv'];
-                $trang_thai = $_POST['trang_thai'];
-                $so_cho = $_POST['so_cho'];
-
-                // $m_san_pham=new M_san_pham();
-                $kq=$m_class->Edit_class($ma_lop, $ten_lop, $ca_hoc,$thoi_gian_khai_giang,$dia_diem_hoc,$ma_gv,$trang_thai,$so_cho);
-
-                if($kq)
+                if(strtotime($_POST["ngay_ket_thuc"]) < strtotime($_POST["ngay_bat_dau"]))
                 {
-
-                    echo "<script>window.location='class.php?ma_khoa_hoc=" . $ma_khoa_hoc . "'</script>";
+                    $error[] = "Ngày kết thúc phải lớn hơn ngày bắt đầu";
                 }
-                else
+
+                if ($phan_tram_giam_gia>100 || $phan_tram_giam_gia < 0)
                 {
-                    echo "<script>alert('Cập nhật không thành công')</script>";
+                    $error[] = "Phần trăm giảm giá phải nhỏ hơn 100 và lớn hơn 0";
+                }
+                if(empty($error)) {
+                    $kq = $m_coupon->Edit_coupon($ma_khuyen_mai, $ten_khuyen_mai, $phan_tram_giam_gia, $ngay_bat_dau, $ngay_ket_thuc, 1);
+
+                    if ($kq) {
+
+                        echo "<script>window.location='coupon.php'</script>";
+                    } else {
+                        echo "<script>alert('Cập nhật không thành công')</script>";
+                    }
                 }
 
             }
             // End Cập nhật
             // View
-            $view = 'views/class/v_editclass.php';
+            $view = 'views/coupon/v_editcoupon.php';
             include('templates/layout.php');
 
         }
@@ -173,30 +174,19 @@ class C_coupon {
 
 
     }
-    function  delete_class()
+    function  delete_coupon()
     {
-        if(isset($_GET["ma_lop"])) {
-            $ma_lop = $_GET["ma_lop"];
-
-            $m_class = new M_class();
-            $kq = $m_class->Delete_class($ma_lop);
-
-//            foreach ($couses as $cs)
-//            {
-//                $m_couse->Delete_couse($cs->ma_khoa_hoc);
-//            }
-
-            if(isset($_GET["ma_khoa_hoc"])) {
-                $ma_khoa_hoc = $_GET["ma_khoa_hoc"];
-            }
-            //  echo count($couses);
+        if(isset($_GET["ma_khuyen_mai"])) {
+            $ma_khuyen_mai = $_GET["ma_khuyen_mai"];
+            $m_coupon = new M_coupon();
+            $kq = $m_coupon->Delete_coupon($ma_khuyen_mai);
             if ($kq) {
-                echo "<script>alert('Xóa thành công !');window.location='class.php?ma_khoa_hoc=" . $ma_khoa_hoc . "'</script>";
+                echo "<script>alert('Xóa thành công !');window.location='coupon.php'</script>";
 
             }
             else {
 
-                echo "<script>alert('Xóa không thành công');wwindow.location='class.php?ma_khoa_hoc=" . $ma_khoa_hoc . "'</script>";
+                echo "<script>alert('Xóa không thành công');wwindow.location='coupon.php'</script>";
             }
 
         }

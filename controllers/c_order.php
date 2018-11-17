@@ -39,16 +39,25 @@ class C_order{
 
             $user = $m_user->read_user_by_iduser($ma_nguoi_dung);
             $couse = $m_oder->read_couse_by_idclass($ma_lop);
+            $kq = $m_oder->return_studentoder($ma_nguoi_dung,1);
+            //if($kq->KQ>0&&)
             if(!empty($discount))
             {
                 $gia_tien = $discount;
             }
             else {
-                $gia_tien = $couse->hoc_phi;
+                if($kq->KQ>0) {
+                    $gia_tien = $couse->hoc_phi-(($couse->hoc_phi*10)/100);
+                }
+                else
+                {
+                    $gia_tien = $couse->hoc_phi;
+                }
             }
             $m_oder->addOderCouse($ma_dk, $ngay_dk,$gia_tien,$ma_lop,$ma_nguoi_dung,$tinh_trang);
             $this->sendMail($ma_nguoi_dung,$ma_lop);
-            echo "đăng kí thành công";
+            $view = 'view/order/v_ordersuccess.php';
+            include('templates/order/layout.php');
            // $couse = $m_oder->read_couse_by_idclass($ma_lop);
 
 //
@@ -102,8 +111,6 @@ class C_order{
         $xhtml .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px'>". $couse->thoi_gian_khai_giang ."</td>";
         $xhtml .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px'>". $couse->dia_diem_hoc ."</td></tr></table>";
         $xhtml .= "<p style='text-align: right'><strong>Tổng tiền: ".$couse->don_gia."</strong></p>";
-
-
         $noi_dung_mail = "<b>Từ: </b>ABCD<p/><b>Email:</b>ABCD<p/>Đăng kí khóa học .$couse->ten_khoa_hoc.thành công!";
 
         $kq=Helper::Gui_mail_lien_he($tieu_de,$xhtml,$user->email);
@@ -114,11 +121,21 @@ class C_order{
             //echo json_encode(array('data' => $_POST['coupon']));
             $ten_khuyen_mai = $_POST['coupon'];
         }
+        if(isset($_SESSION['user']))
+        {
+            $ma_nguoi_dung = $_SESSION['user']->ma_nguoi_dung;
+        }
         //$ten_khuyen_mai = "CONCAC1";
         $m_coupon = new M_coupon();
+        $m_oder = new M_oder();
         $kq = $m_coupon->Return_coupon_by_namecoupon($ten_khuyen_mai);
         $kq1 = $m_coupon->Read_coupon_by_namecoupon($ten_khuyen_mai);
-        if(strtotime($kq1->ngay_bat_dau)<= time()&&strtotime($kq1->ngay_ket_thuc) >=time())
+        $kqo = $m_oder->return_studentoder($ma_nguoi_dung,1);
+
+        $now = date('Y-m-d');
+        $startDate = date('Y-m-d', strtotime($kq1->ngay_bat_dau));
+        $endDate = date('Y-m-d', strtotime($kq1->ngay_ket_thuc));
+        if(($now >= $startDate) && ($now <= $endDate))
         {
             $flag = 1;
         }
@@ -126,7 +143,9 @@ class C_order{
         {
             $flag = 2;
         }
-        echo json_encode(array('data' => $kq->KQ,'giamgia' => $kq1->phan_tram_giam_gia,'date' => $flag));
+
+
+        echo json_encode(array('data' => $kq->KQ,'giamgia' => $kq1->phan_tram_giam_gia,'date' => $flag,'rs'=>$kqo->KQ));
 
     }
     function charge() {
@@ -134,17 +153,43 @@ class C_order{
 //        print_r($_POST);
 //        echo "</pre>";
 //        die();
+        if(isset($_SESSION['user']))
+        {
+            $ma_nguoi_dung = $_SESSION['user']->ma_nguoi_dung;
+        }
         $m_oder = new M_oder();
         $ma_lop = $_POST["ma_lop"];
        $couse = $m_oder->read_couse_by_idclass($ma_lop);
+       $kq = $m_oder->return_studentoder($ma_nguoi_dung,1);
         $token  = $_POST['stripeToken'];
         $email  = $_POST['stripeEmail'];
+        $discount  = $_POST['txtDiscount'];
+//        echo $discount;
+//        die();
 
         $customer = \Stripe\Customer::create([
             'email' => $email,
             'source'  => $token,
         ]);
-        $moneyVND = ($couse->hoc_phi/20000)*100;
+
+        if(!empty($discount))
+        {
+            $moneyVND = ($discount/20000)*100;
+            $giatien = $discount;
+        }
+        else {
+            if($kq->KQ>0) {
+                $moneyVND = ($couse->hoc_phi/20000)*100-(((($couse->hoc_phi/20000)*100)*10)/100);
+                $giatien = $couse->hoc_phi-(($couse->hoc_phi*10)/100);
+            }
+            else
+            {
+                $moneyVND = ($couse->hoc_phi/20000)*100;
+                $giatien = $couse->hoc_phi;
+            }
+
+            //$giatien = $couse->hoc_phi;
+        }
         $charge = \Stripe\Charge::create([
             'customer' => $customer->id,
             'amount'   => $moneyVND,
@@ -152,14 +197,12 @@ class C_order{
         ]);
 
         $ma_dk = null;
-        if(isset($_SESSION['user']))
-        {
-            $ma_nguoi_dung = $_SESSION['user']->ma_nguoi_dung;
-        }
+
         $ngay_dk = date('Y-m-d', time());
-        $m_oder->addOderCouse($ma_dk, $ngay_dk,$couse->hoc_phi,$ma_lop,$ma_nguoi_dung,1);
+        $m_oder->addOderCouse($ma_dk, $ngay_dk,$giatien,$ma_lop,$ma_nguoi_dung,1);
         $this->sendMail($ma_nguoi_dung,$ma_lop);
-        echo "Đăng kí thành công";
+        $view = 'view/order/v_ordersuccess.php';
+        include('templates/order/layout.php');
 //        echo "<pre>";
 //        print_r($charge);
 //        echo "</pre>";

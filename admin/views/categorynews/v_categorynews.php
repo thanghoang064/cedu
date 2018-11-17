@@ -1,8 +1,7 @@
 <div id="main-wrapper">
 
-    <div class="content-heading text-center" style="margin-right: 53%">
-        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='couse.php?ma_loai=<?php echo $couse->ma_loai;?>'">Quay lại </button>
-        <button  style="margin:auto" class="btn btn-default" href="" id="" onclick="window.location.href='addclass.php?ma_khoa_hoc=<?php echo $_GET["ma_khoa_hoc"];?>'">Thêm </button>
+    <div class="content-heading text-center">
+        <button  style="margin-right: 58%" class="btn btn-default" onclick="window.location.href='addcategory.php'" id="them_loai">Thêm </button>
 
     </div>
     <!-- ============================================================== -->
@@ -48,26 +47,21 @@
                                     <thead>
                                     <tr>
 
-                                        <th>Tên khuyến mãi</th>
-                                        <th>Phần trăm giảm giá</th>
-                                        <th>Ngày bắt đầu</th>
-                                        <th>Ngày kết thúc</th>
-                                        <th>Trạng thái</th>
-                                        <th style="">Hành động</th>
+                                        <th>Tên danh mục</th>
+                                        <th style="    width: 8%;">Tình trạng</th>
+                                        <th style="width: 8%">Hành động</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    foreach ($coupons as $cp) {
+                                    foreach ($categorynews as $ct) {
                                         ?>
                                         <tr>
 
-                                            <td><?php echo $cp->ten_khuyen_mai;?></td>
-                                            <td><?php echo $cp->phan_tram_giam_gia;?></td>
-                                            <td><?php echo $cp->ngay_bat_dau;?></td>
-                                            <td><?php echo $cp->ngay_ket_thuc;?></td>
+                                            <td><a href="news.php?ma_loai=<?php echo $ct->ma_danh_muc?>"><?php echo $ct->ten_danh_muc;?></a></td>
                                             <td><span style="margin-right: 15%;"
-                                                      class="badge badge-pill badge-<?php if($cp->trang_thai==0)
+                                                      class="badge badge-pill badge-<?php if($ct->trang_thai==0)
                                                       {
                                                           echo "danger";
                                                       }
@@ -77,27 +71,17 @@
                                                       }
 
                                                       ?>
-                            float-right"><?php if($cp->trang_thai==0)
+                            float-right"><?php if($ct->trang_thai==0)
                                                     {
-                                                        echo "ngưng hoạt động";
+                                                        echo "chưa kích hoạt";
                                                     }
                                                     else
                                                     {
-                                                        echo "đang hoạt động";
+                                                        echo "kích hoạt";
                                                     }?></span>
                                             </td>
                                             <td>
-                                                <button type="button" id="" class="btn btn-info"
-                                                        onclick="window.location.href='editcoupon.php?ma_khuyen_mai=<?php echo $cp->ma_khuyen_mai;?>'">
-                                                    Sửa
-                                                </button>
-                                                <button type="button" id="" class="btn btn-danger"
-                                                        onclick="window.location.href='deletecoupon.php?ma_khuyen_mai=<?php echo $cp->ma_khuyen_mai;?>'">
-                                                    Xóa
-                                                </button>
-                                                <button type="button" data-id="<?php echo $cp->ma_khuyen_mai?>" class="btn btn-orange btn-send-coupon">
-                                                    Gửi mã khuyến mãi
-                                                </button>
+                                                <button type="submit" id="sua_loai" class="btn btn-info" onclick="window.location.href='editcategorynews.php?ma_danh_muc=<?php echo $ct->ma_danh_muc;?>'">Sửa</button>
 
                                             </td>
                                         </tr>
@@ -141,27 +125,3 @@
     <!-- End Page wrapper  -->
     <!-- ============================================================== -->
 </div>
-
-<script>
-    $(document).ready(function() {
-        $(".btn-send-coupon").click(function() {
-            $("body").loading({
-               message: "Đang xử lý gửi email"
-            });
-            const id = $(this).data('id');
-            $.ajax({
-                url: 'sendcoupon.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    id
-                }
-            }).done(function(result) {
-                $("body").loading('stop');
-                if(result.status == 1) {
-                    window.location.reload();
-                }
-            });
-        })
-    })
-</script>

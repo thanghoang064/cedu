@@ -27,6 +27,12 @@ class M_oder extends database {
         $this->setQuery($sql);
         return $this->loadRow(array($ma_lop,$ma_nguoi_dung));
     }
+    public function return_studentoder($ma_nguoi_dung,$tinh_trang)
+    {
+        $sql = "SELECT COUNT(*) as KQ FROM dang_ki WHERE ma_nguoi_dung = ? and tinh_trang = ?";
+        $this->setQuery($sql);
+        return $this->loadRow(array($ma_nguoi_dung,$tinh_trang));
+    }
 
 }
 ?>

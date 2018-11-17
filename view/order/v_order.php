@@ -1,5 +1,8 @@
+<?php
+@session_start();
+?>
 <script src="https://checkout.stripe.com/checkout.js"></script>
-<div class="sc_section bg_tint_dark sc_contact_bg_img" xmlns="http://www.w3.org/1999/html">
+<div id="view-order" class="sc_section bg_tint_dark sc_contact_bg_img" xmlns="http://www.w3.org/1999/html">
     <div class="sc_section_overlay sc_contact_bg_color" data-overlay="0.8" data-bg_color="#024b5e">
         <div class="sc_section_content">
             <div class="sc_content content_wrap margin_top_3em_imp margin_bottom_3_5em_imp">
@@ -15,9 +18,28 @@
                                     <h4 style="color: #444444">Ca học: <?php echo $couse->ca_hoc; ?></h4>
                                     <h4 style="color: #444444">Ngày khai giảng: <?php echo $couse->thoi_gian_khai_giang; ?></h4>
                                     <h4 style="color: red">Còn lại: <?php echo $couse->so_cho; ?> slot</h4>
-                                    <h4 style="color: red">Học phí : <?php echo number_format($couse->hoc_phi); ?> VND</h4>
-                                    <input type="hidden" name="txtMoney" id="txtMoney" value="<?php echo $couse->hoc_phi;?>"/></br>
-                                    <input type="hidden" name="txtDiscount" id="txtDiscount" value=""/></br>
+                                    <h4 style="color: red">Học phí : <?php
+                                        if(isset($_SESSION['user']))
+                                        {
+                                            $ma_nguoi_dung = $_SESSION['user']->ma_nguoi_dung;
+
+                                        }
+                                    //    echo $ma_nguoi_dung;
+                                       $m_oder = new M_oder();
+                                       $kq = $m_oder->return_studentoder($ma_nguoi_dung,1);
+                                      // echo $kq->KQ;
+                                        if($kq->KQ>0)
+                                        {
+                                            $hoc_phi = $couse->hoc_phi-(($couse->hoc_phi*10)/100);
+                                        }
+                                        else
+                                        {
+                                            $hoc_phi = $couse->hoc_phi;
+                                        }
+
+                                        echo number_format($hoc_phi); ?> VND</h4>
+                                    <input type="hidden" name="txtMoney" id="txtMoney" value="<?php echo $hoc_phi;?>"/></br>
+                                    <input type="hidden" name="txtDiscount" class="txtDiscount" value=""/></br>
 <!--                                    <input type="hidden" name="txtValue" id="txtValue" /></br>-->
                                     Mã khuyến mãi <input type="text" name="txtCoupon" id="txtCoupon" />
                                     <button type="button" class="btn-info" id="btnXacNhan" name="btnXacNhan">Xác nhận</button></br>
@@ -62,6 +84,7 @@
                                     <input type="hidden" id="stripeToken" name="stripeToken" />
                                     <input type="hidden" id="stripeEmail" name="stripeEmail" />
                                     <input type="hidden" id="amountInCents" name="amountInCents" />
+                                    <input type="hidden" name="txtDiscount" class="txtDiscount" value=""/></br>
                                 </form>
 
                                 <input type="button" id="customButton" value="Pay With Card">
@@ -77,8 +100,6 @@
 
 <script>
     $(document).ready(function() {
-        const value = $(this).data("value");
-
         // var handler = StripeCheckout.configure({
         //     key: 'pk_test_RktRYcffDgayxWK6b7Gho9Ol',
         //     image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -119,7 +140,7 @@
         $("#customButton").click(function(e) {
             let moneyStripe = 0;
             let money = +$("#txtMoney").val();
-            let discount = +$("#txtDiscount").val();
+            let discount = +$(".txtDiscount").val();
             if(discount != 0) {
                 moneyStripe = discount / 200;
                 console.log(1);
@@ -138,7 +159,8 @@
         })
 
         $(".payment").click(function() {
-           $("#type-payment").val(value);
+            const value = $(this).data("value");
+            $("#type-payment").val(value);
             if (value==1)
             {
                 $("#btnDangKi").show();
@@ -151,6 +173,7 @@
             }
             if (value==3)
             {
+                console.log(123);
                 $("#btnDangKi").hide();
                 return;
             }
@@ -185,7 +208,7 @@
                         const moneyDiscount = money * result.giamgia / 100;
                         $('.stripe-button').data('amount', moneyDiscount);
                         // Open Checkout with further options
-                        $('#txtDiscount').val(money - moneyDiscount);
+                        $('.txtDiscount').val(money - moneyDiscount);
                         var nana = (money - moneyDiscount).toLocaleString('it-IT', {
                             style: 'currency',
                             currency: 'VND'

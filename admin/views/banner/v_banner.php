@@ -1,9 +1,8 @@
+
 <div id="main-wrapper">
-
     <div class="content-heading text-center" style="margin-right: 53%">
-        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='couse.php?ma_loai=<?php echo $couse->ma_loai;?>'">Quay lại </button>
-        <button  style="margin:auto" class="btn btn-default" href="" id="" onclick="window.location.href='addclass.php?ma_khoa_hoc=<?php echo $_GET["ma_khoa_hoc"];?>'">Thêm </button>
-
+        <button  style="margin: auto" class="btn btn-default" onclick="">Quay lại </button>
+        <button  style="margin:auto" class="btn btn-default" onclick="window.location.href='addbanner.php'" id="" onclick="">Thêm </button>
     </div>
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
@@ -48,26 +47,24 @@
                                     <thead>
                                     <tr>
 
-                                        <th>Tên khuyến mãi</th>
-                                        <th>Phần trăm giảm giá</th>
-                                        <th>Ngày bắt đầu</th>
-                                        <th>Ngày kết thúc</th>
+                                        <th>Tiêu đề </th>
+                                        <th>Ảnh tiêu đề</th>
                                         <th>Trạng thái</th>
                                         <th style="">Hành động</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    foreach ($coupons as $cp) {
+                                    foreach($banners as $bn) {
+
                                         ?>
                                         <tr>
 
-                                            <td><?php echo $cp->ten_khuyen_mai;?></td>
-                                            <td><?php echo $cp->phan_tram_giam_gia;?></td>
-                                            <td><?php echo $cp->ngay_bat_dau;?></td>
-                                            <td><?php echo $cp->ngay_ket_thuc;?></td>
+                                            <td><?php echo $bn->ten_tieu_de;?></td>
+                                            <td><img src="../public/layout/imagesbanner/<?php  echo $bn->hinh;?>" width="80px"/></td>
                                             <td><span style="margin-right: 15%;"
-                                                      class="badge badge-pill badge-<?php if($cp->trang_thai==0)
+                                                      class="badge badge-pill badge-<?php if($bn->trang_thai==0)
                                                       {
                                                           echo "danger";
                                                       }
@@ -77,7 +74,7 @@
                                                       }
 
                                                       ?>
-                            float-right"><?php if($cp->trang_thai==0)
+                            float-right"><?php if($bn->trang_thai==0)
                                                     {
                                                         echo "ngưng hoạt động";
                                                     }
@@ -88,22 +85,16 @@
                                             </td>
                                             <td>
                                                 <button type="button" id="" class="btn btn-info"
-                                                        onclick="window.location.href='editcoupon.php?ma_khuyen_mai=<?php echo $cp->ma_khuyen_mai;?>'">
+                                                        onclick="window.location.href='editbanner.php?ma_tieu_de=<?php echo $bn->ma_tieu_de;?>'">
                                                     Sửa
                                                 </button>
-                                                <button type="button" id="" class="btn btn-danger"
-                                                        onclick="window.location.href='deletecoupon.php?ma_khuyen_mai=<?php echo $cp->ma_khuyen_mai;?>'">
-                                                    Xóa
-                                                </button>
-                                                <button type="button" data-id="<?php echo $cp->ma_khuyen_mai?>" class="btn btn-orange btn-send-coupon">
-                                                    Gửi mã khuyến mãi
-                                                </button>
-
                                             </td>
+
                                         </tr>
                                         <?php
                                     }
                                     ?>
+
                                     </tbody>
 
                                 </table>
@@ -141,27 +132,3 @@
     <!-- End Page wrapper  -->
     <!-- ============================================================== -->
 </div>
-
-<script>
-    $(document).ready(function() {
-        $(".btn-send-coupon").click(function() {
-            $("body").loading({
-               message: "Đang xử lý gửi email"
-            });
-            const id = $(this).data('id');
-            $.ajax({
-                url: 'sendcoupon.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    id
-                }
-            }).done(function(result) {
-                $("body").loading('stop');
-                if(result.status == 1) {
-                    window.location.reload();
-                }
-            });
-        })
-    })
-</script>

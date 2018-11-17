@@ -41,12 +41,12 @@ class M_coupon extends database
     }
 //
 //
-//    public function Delete_category($ma_loai){
-//
-//        $sql = "delete from loai_khoa_hoc where ma_loai = ?";
-//        $this->setQuery($sql);
-//        return $this->execute(array($ma_loai));
-//    }
+    public function Delete_coupon($ma_khuyen_mai){
+
+        $sql = "delete from khuyen_mai where ma_khuyen_mai = ?";
+        $this->setQuery($sql);
+        return $this->execute(array($ma_khuyen_mai));
+    }
 //    public function Doc_ma_loai_san_pham_theo_ma_loai_cha($ma_loai_cha=0)
 //    {
 //        $sql = "select ma_loai,ten_loai from loai_san_pham where ma_loai_cha = ?";
