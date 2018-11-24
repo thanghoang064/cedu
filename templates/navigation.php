@@ -34,27 +34,19 @@
                 <li><a href="single-research.html">Research Details</a></li>
             </ul>
         </li>
-        <li><a href="#">Tin tức</a>
+        <?php
+        $category_news = Helper::loadMenu_news();
+        ?>
+        <li><a href="#">Danh mục tin tức</a>
             <ul>
-                <li class="has-child-menu"><a href="#">News</a>
-                    <ul class="thired-level">
-                        <li><a href="news1.html">News 1</a></li>
-                        <li><a href="news2.html">News 2</a></li>
-                        <li><a href="single-news.html">News Details</a></li>
-                    </ul>
-                </li>
-                <li class="has-child-menu"><a href="#">Event</a>
-                    <ul class="thired-level">
-                        <li><a href="event.html">Event</a></li>
-                        <li><a href="single-event.html">Event Details</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li><a href="#">Sản phẩm</a>
-            <ul>
-                <li><a href="gallery1.html">Gallery 1</a></li>
-                <li><a href="gallery2.html">Gallery 2</a></li>
+                <?php
+                foreach ($category_news as $ct_news) {
+                ?>
+                <li><a href="news.php?ma_danh_muc=<?php echo $ct_news->ma_danh_muc;?>"><?php echo $ct_news->ten_danh_muc;?></a></li>
+                    <?php
+                }
+                ?>
+
             </ul>
         </li>
         <li><a href="#">Liên hệ</a>

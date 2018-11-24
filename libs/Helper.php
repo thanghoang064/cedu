@@ -8,6 +8,13 @@ class Helper{
         $category = $m_category->read_category();
         return $category;
     }
+    public static function loadMenu_news()
+    {
+        require_once ("models/m_category_news.php");
+        $m_category_news = new M_category_news();
+        $category_news = $m_category_news->read_category_news();
+        return $category_news;
+    }
     public static function Gui_mail_lien_he($tieu_de, $noi_dung,$email){
         $mail = new PHPMailer(true);
         $mail->CharSet = "UTF-8";

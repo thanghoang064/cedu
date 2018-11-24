@@ -69,7 +69,7 @@
 <!--                                                    <button class="btn btn-primary register-course" data-href="order.php?ma_lop=--><?php //echo $cl->ma_lop ?><!--" onclick="registerCourse()" type="button"  --><?php
 
                                                     if($kq->KQ == 0) {
-                                                        echo "<button class='btn btn-primary register-course' data-href='order.php?ma_lop=".$cl->ma_lop."' onclick='registerCourse()' type='button'>Đăng ký</button>";
+                                                        echo "<button class='btn btn-primary register-course-order' data-href='order.php?ma_lop=".$cl->ma_lop."' type='button'>Đăng ký</button>";
                                                     }
                                                     else
                                                     {
@@ -395,7 +395,8 @@
         console.log(123);
     })
 
-    function registerCourse() {
+
+    $(".register-course-order").click(function() {
         const isLogged = $("#is-logged").val();
         if(isLogged == "none") {
             $("#login-button").addClass("open");
@@ -405,9 +406,8 @@
             }, 500);
         }
         else {
-            var element = $(".register-course");
-            var href = $(element).data("href");
+            var href = $(this).data("href");
             window.location.href = href;
         }
-    }
+    });
 </script>

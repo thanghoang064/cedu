@@ -1,8 +1,8 @@
 <div id="main-wrapper">
 
-    <div class="content-heading text-center">
-        <button  style="margin-right: 58%" class="btn btn-default" onclick="window.location.href='addcategory.php'" id="them_loai">Thêm </button>
-
+    <div class="content-heading text-center" style="margin-right: 53%;">
+        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='category.php'">Quay lại </button>
+        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='addcouse.php?ma_loai=<?php echo $_GET["ma_loai"];?>'">Thêm </button>
     </div>
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
@@ -37,31 +37,36 @@
             <!-- ============================================================== -->
             <div class="row">
                 <div class="col-12">
+                    //   `ma_tin_tuc`, `ten_tin_tuc`, `hinh`, `mo_ta_ngan`, `noi_dung`, `ma_danh_muc`, `trang_thai`, `ngay_tao`
 
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Basic Datatable</h5>
+                            <h5 class="card-title"> Danh mục tin tức </h5>
                             <div class="table-responsive">
                                 <table id="zero_config" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
-
-                                        <th>Tên danh mục</th>
-                                        <th style="    width: 8%;">Tình trạng</th>
-                                        <th style="width: 8%">Hành động</th>
-
+                                        <th>Tên tin tức</th>
+                                        <th>Mô tả ngắn</th>
+                                        <th >Hình ảnh</th>
+                                        <th >Nội dung</th>
+                                        <th >Trạng thái</th>
+                                        <th >Hành động</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    foreach ($categorynews as $ct) {
+                                    foreach ($news as $ns) {
                                         ?>
                                         <tr>
 
-                                            <td><a href="news.php?ma_danh_muc=<?php echo $ct->ma_danh_muc?>"><?php echo $ct->ten_danh_muc;?></a></td>
+                                            <td><?php echo $ns->ten_tin_tuc;?></a></td>
+                                            <td><?php echo $ns->mo_ta_ngan;?> </td>
+                                            <td><img src="../public/layout/imagesnews/<?php echo $ns->hinh;?>" width="80px"/></td>
+                                            <td><?php echo $ns->noi_dung;?> </td>
                                             <td><span style="margin-right: 15%;"
-                                                      class="badge badge-pill badge-<?php if($ct->trang_thai==0)
+                                                      class="badge badge-pill badge-<?php if($ns->trang_thai==1)
                                                       {
                                                           echo "danger";
                                                       }
@@ -71,18 +76,19 @@
                                                       }
 
                                                       ?>
-                            float-right"><?php if($ct->trang_thai==0)
+                            float-right"><?php if($ns->trang_thai==1)
                                                     {
-                                                        echo "chưa kích hoạt";
+                                                        echo "kích hoạt";
                                                     }
                                                     else
                                                     {
-                                                        echo "kích hoạt";
+                                                        echo "chưa kích hoạt";
                                                     }?></span>
                                             </td>
                                             <td>
-                                                <button type="submit" id="sua_loai" class="btn btn-info" onclick="window.location.href='editcategorynews.php?ma_danh_muc=<?php echo $ct->ma_danh_muc;?>'">Sửa</button>
-
+                                                <button type="submit" id="sua_loai" class="btn btn-info" onclick="window.location.href='editnews.php?ma_tin_tuc=<?php echo $ns->ma_tin_tuc;?>&ma_danh_muc=<?php echo $_GET["ma_danh_muc"];?>'">
+                                                    Sửa
+                                                </button>
                                             </td>
                                         </tr>
                                         <?php
