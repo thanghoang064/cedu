@@ -48,7 +48,9 @@ class C_couse{
     {
         include ("models/m_couse.php");
         include ("models/m_order.php");
+        include ("models/m_rate.php");
         $m_couse = new M_couse();
+        $m_rate = new M_rate();
         $couses = $m_couse->read_couse();
         $ma_khoa_hoc = $couses[0]->ma_khoa_hoc;
         if(isset($_GET["ma_khoa_hoc"]))
@@ -59,20 +61,28 @@ class C_couse{
 
         $couse = $m_couse ->read_couse_by_idcouse($ma_khoa_hoc);
         $classs = $m_couse->read_class_and_teacher_by_idcouse($ma_khoa_hoc);
-
-
+        $rates = $m_rate->Read_rate_home_by_idcouse($ma_khoa_hoc);
         $view = 'view/singer/v_singer.php';
         include('templates/singer/layout.php');
     }
     public function Hien_thi_trang_chu()
     {
         include ("models/m_couse.php");
+        include ("models/m_news.php");
+    //    include ("models/m_rate.php");
         include ("models/m_rate.php");
-        $m_couse = new M_couse();
-        $new_couses = $m_couse->Read_couse_new(0,6);
+        // include ("models/m_news.php");
+        //    include ("models/m_rate.php");
         $m_rate = new M_rate();
-        $rate = $m_rate->read_rate();
+        $m_couse = new M_couse();
+        $m_news = new M_news();
+        $rates = $m_rate->Read_rate_home();
+        $new_couses = $m_couse->Read_couse_new(0,3);
+        $cc = $m_couse->count_couse();
+        $ct1 = $m_couse->count_teacher();
 
+        $cs = $m_couse->count_students();
+        $news = $m_news->read_news_by_latesthome();
         $view = 'view/home/v_home.php';
         include 'templates/layout.php';
 

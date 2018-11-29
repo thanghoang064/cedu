@@ -1,5 +1,5 @@
 <?php
-//session_start();
+@session_start();
 include ("models/m_user.php");
 class C_user
 {
@@ -133,9 +133,9 @@ class C_user
 
 
         }
-        if(isset($_SESSION["ma_quyen"]) )
+        if(isset($_SESSION['user_admin']))
         {
-            if($_SESSION["ma_quyen"]==1) {
+            if($_SESSION['user_admin']->ma_quyen==1) {
                 include('templates/layout.php');
             }
 
@@ -144,8 +144,8 @@ class C_user
                 //session_destroy();
                 $flag = true;
                 header("location:login.php");
-                unset($_SESSION["ma_quyen"]);
-                unset($_SESSION["fullname"]);
+             //   unset($_SESSION["admin"]);
+             //   unset($_SESSION["admin"]);
 
              //   echo "123";
             }
@@ -156,11 +156,11 @@ class C_user
         {
             if ($flag == true)
             {
-                $_SESSION['error_role']="Bạn không có quyền ";
+              //  $_SESSION['error_role']="Bạn không có quyền ";
                 header("location:login.php");
             }
             else {
-                $_SESSION['error'] = "Thông tin đăng nhập không hợp lệ ";
+              //  $_SESSION['error'] = "Thông tin đăng nhập không hợp lệ ";
             }
             header("location:login.php");
         }
@@ -174,17 +174,12 @@ class C_user
         session_destroy();
         header("location:login.php");
     }
+
     function luu_dang_nhap($ten,$mk)
     {
-
         $m_user=new M_user();
-
         $user = $m_user->read_user_by_id_pass($ten,$mk);
-
-            $_SESSION['fullname'] = $user->ho_ten;
-
-            $_SESSION['ma_quyen'] = $user->ma_quyen;
-        $_SESSION['ma_nd'] = $user->ma_nguoi_dung;
+        $_SESSION['user_admin'] = $user;
     }
 
 }

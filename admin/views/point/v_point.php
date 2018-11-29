@@ -51,11 +51,15 @@
                                         <?php
                                             $hidden = $kq->KQ > 0 ? "hide" : "";
                                         ?>
+                                        <?php
+                                            if($flag) {
+                                        ?>
                                         <form method="POST" action="importExcel.php" enctype="multipart/form-data" class="text-right <?php echo $hidden?>">
                                             <button class="btn btn-danger" type="submit" name="btnGui">Thêm bảng điểm excel </button>
                                             <input type="file" name="file">
                                             <input type="hidden" name="ma_lop" value="<?php echo $_GET['ma_lop'];?>" ?>
                                         </form>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>

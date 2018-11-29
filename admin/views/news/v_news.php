@@ -1,8 +1,8 @@
 <div id="main-wrapper">
 
     <div class="content-heading text-center" style="margin-right: 53%;">
-        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='category.php'">Quay lại </button>
-        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='addcouse.php?ma_loai=<?php echo $_GET["ma_loai"];?>'">Thêm </button>
+        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='categorynews.php'">Quay lại </button>
+        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='addnews.php?ma_danh_muc=<?php echo $_GET["ma_danh_muc"];?>'">Thêm </button>
     </div>
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
@@ -37,8 +37,6 @@
             <!-- ============================================================== -->
             <div class="row">
                 <div class="col-12">
-                    //   `ma_tin_tuc`, `ten_tin_tuc`, `hinh`, `mo_ta_ngan`, `noi_dung`, `ma_danh_muc`, `trang_thai`, `ngay_tao`
-
 
                     <div class="card">
                         <div class="card-body">

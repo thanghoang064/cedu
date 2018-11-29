@@ -5,17 +5,25 @@ class C_point{
 
     public function show_student()
     {
-
-
+        $flag = false;
         $m_point = new M_point();
 
         if(isset($_GET['ma_lop']))
         {
             $ma_lop = $_GET['ma_lop'];
         }
+
+        $item = $m_point->get_time_expired($ma_lop);
+        $time = $item->thoi_gian_khai_giang;
+        $week = $item->thoi_gian;
+
+        if(time() > strtotime($time) + ($week * 7 * 24 * 3600)) {
+            $flag = true;
+        }
         $kq = $m_point->return_kq($ma_lop);
         if($kq->KQ > 0) {
             $students = $m_point->Read_student_by_idclass_have_point($ma_lop);
+
         }
         else
         {

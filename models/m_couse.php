@@ -11,7 +11,24 @@ class M_couse extends database{
         return $this->loadAllRows();
 
     }
-
+    public function count_teacher()
+    {
+        $sql = "select count(*) as CT from giang_vien ";
+        $this->setQuery($sql);
+        return $this->loadRow();
+    }
+    public function count_couse()
+    {
+        $sql = "select count(*) as CC from khoa_hoc ";
+        $this->setQuery($sql);
+        return $this->loadRow();
+    }
+    public function count_students()
+    {
+        $sql = "select count(*) as CS from nguoi_dung where ma_quyen = 2";
+        $this->setQuery($sql);
+        return $this->loadRow();
+    }
     public function read_couse_by_category($ma_loai, $vt = -1, $limit = -1)
     {
         $sql = "select * from khoa_hoc where ma_loai = ?";
@@ -39,10 +56,11 @@ class M_couse extends database{
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
+
     public function Read_couse_new($vt = -1, $limit = -1)
     {
         //$vt = -1, $limit = -1
-        $sql = "select*from khoa_hoc where khoa_hoc_moi=1 order by ma_khoa_hoc desc";
+        $sql = "SELECT lop.*, khoa_hoc.ten_khoa_hoc FROM lop, khoa_hoc WHERE khoa_hoc.ma_khoa_hoc = lop.ma_khoa_hoc AND DATE(thoi_gian_khai_giang) > DATE(NOW()) and DATE(thoi_gian_khai_giang) <= DATE_ADD(NOW(), INTERVAL 1 MONTH) order by thoi_gian_khai_giang ";
         if ($vt >= 0 && $limit > 0) {
             $sql .= " limit $vt,$limit";
         }
@@ -57,6 +75,7 @@ class M_couse extends database{
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
+
 
 
 

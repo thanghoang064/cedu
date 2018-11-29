@@ -1,7 +1,7 @@
 <div id="main-wrapper">
 
     <div class="content-heading text-center">
-        <button  style="margin-right: 58%" class="btn btn-default" onclick="window.location.href='addcategory.php'" id="them_loai">Thêm </button>
+        <button  style="margin-right: 58%" class="btn btn-default" onclick="window.location.href='addcategorynews.php'" id="them_loai">Thêm </button>
 
     </div>
     <!-- ============================================================== -->

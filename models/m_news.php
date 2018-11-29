@@ -38,6 +38,12 @@ class M_news extends database{
         $this->setQuery($sql);
         return $this->loadAllRows(array($ma_tin_tuc));
     }
+    public function read_news_by_latesthome()
+    {
+        $sql = "SELECT * FROM `tin_tuc`  ORDER BY ngay_tao desc LIMIT 0, 4";
+        $this->setQuery($sql);
+        return $this->loadAllRows();
+    }
     public function read_class_by_idcouse($ma_khoa_hoc)
     {
         $sql = "select * from lop where ma_khoa_hoc  = ".$ma_khoa_hoc;

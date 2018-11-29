@@ -30,8 +30,8 @@ session_start();
                                     else
                                     {
                                         ?>
-                                        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="Tel:+1234567890"> + 123 456 78910</a></li>
-                                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#">info@academics.com</a></li>
+                                        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="Tel:+1234567890"> 094.806.1238</a></li>
+                                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#">thanghoang064@gmail.com</a></li>
                                         <?php
                                     }
                                     ?>
@@ -48,21 +48,20 @@ session_start();
                                             ?>
                                             <a class="login-btn-area" href="#" id="login-button"><i class="fa fa-lock"
                                                                                                     aria-hidden="true"></i>
-                                                Login</a>
+                                                Đăng nhập</a>
                                             <?php
                                         }
                                         ?>
                                         <div class="login-form" id="login-form" style="display: none;">
-                                            <div class="title-default-left-bold">Login</div>
+                                            <div class="title-default-left-bold">Đăng nhập</div>
                                             <form method="POST">
-                                                <label>Username or email address *</label>
-                                                <input type="text" placeholder="Name or E-mail" name="ten_dang_nhap"  />
-                                                <label>Password *</label>
-                                                <input type="password" placeholder="Password" name="mat_khau" />
-                                                <label class="check">Lost your password?</label>
-                                                <span><input type="checkbox" name="remember"/>Remember Me</span>
-                                                <button class="default-big-btn" type="submit" name="login" value="Login">Login</button>
-                                                <button class="default-big-btn form-cancel" type="submit" value="">Cancel</button>
+                                                <label>Tên người dùng hoặc email *</label>
+                                                <input type="text" placeholder="E-mail" name="ten_dang_nhap"  required/>
+                                                <label>Mật khẩu *</label>
+                                                <input type="password" placeholder="Mật khẩu" name="mat_khau" required/>
+                                                <label class="check">Bạn chưa có tài khoản?</label>
+                                                <button class="default-big-btn" type="submit" name="login" value="Login">Đăng nhập</button>
+                                                <button class="default-big-btn form-cancel" type="submit" value="">Hủy</button>
                                             </form>
                                         </div>
                                     </li>

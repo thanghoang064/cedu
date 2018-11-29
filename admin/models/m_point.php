@@ -6,14 +6,14 @@ class M_point extends database
     public function Read_student_by_idclass($ma_lop)
     {
 
-        $sql = "SELECT nd.ma_nguoi_dung,nd.ho_ten FROM nguoi_dung as nd,dang_ki as dk WHERE  nd.ma_quyen = 2 and nd.ma_nguoi_dung = dk.ma_nguoi_dung and dk.ma_lop = $ma_lop" ;
+        $sql = "SELECT nd.ma_nguoi_dung,nd.ho_ten FROM nguoi_dung as nd,dang_ki as dk WHERE  nd.ma_quyen = 2 and nd.ma_nguoi_dung = dk.ma_nguoi_dung and dk.ma_lop = $ma_lop  and dk.tinh_trang = 1" ;
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
     public function Read_student_by_idclass_have_point($ma_lop)
     {
 
-        $sql = "SELECT nd.ma_nguoi_dung,nd.ho_ten,dt.diem FROM nguoi_dung as nd,dang_ki as dk,diem_thi as dt WHERE dt.ma_nguoi_dung = dk.ma_nguoi_dung and  nd.ma_quyen = 2 and nd.ma_nguoi_dung = dk.ma_nguoi_dung and dk.ma_lop = $ma_lop" ;
+        $sql = "SELECT nd.ma_nguoi_dung,nd.ho_ten,dt.diem FROM nguoi_dung as nd,dang_ki as dk, diem_thi as dt where dt.ma_lop = $ma_lop and nd.ma_nguoi_dung = dt.ma_nguoi_dung and dk.tinh_trang = 1 and dk.ma_nguoi_dung = nd.ma_nguoi_dung group by nd.ma_nguoi_dung" ;
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
@@ -36,6 +36,12 @@ class M_point extends database
         return $this->loadRow(array($ma_lop));
     }
 
+    public function get_time_expired($ma_lop)
+    {
+        $sql = "select * from khoa_hoc as kh, lop as l where kh.ma_khoa_hoc = l.ma_khoa_hoc and l.ma_lop = ?";
+        $this->setQuery($sql);
+        return $this->loadRow(array($ma_lop));
+    }
 
 }
 ?>

@@ -1,4 +1,5 @@
 <?php
+include_once 'checklogin.php';
 include('controllers/c_point.php');
 //$date = new DateTime(date('Y-m-d'));
 //$timeStamp = $date->getTimestamp();

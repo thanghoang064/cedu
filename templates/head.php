@@ -40,10 +40,10 @@
     <link rel="stylesheet" href="public/layout/css/reImageGrid.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="public/layout/style.css">
-    <link rel="stylesheet" href="public/layout/css/edit.css">
     <link rel="stylesheet" href="public/layout/css/select2.min.css">
     <!-- Modernizr Js -->
     <script src="public/layout/js/modernizr-2.8.3.min.js"></script>
     <script src="public/layout/js/jquery-2.2.4.min.js" type="text/javascript"></script>
     <!-- Select2 CSS -->
+    <link rel="stylesheet" href="public/layout/css/edit.css">
 </head>

@@ -2,7 +2,7 @@
 
     <div class="content-heading text-center" style="margin-right: 53%">
         <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='couse.php?ma_loai=<?php echo $couse->ma_loai;?>'">Quay lại </button>
-        <button  style="margin:auto" class="btn btn-default" href="" id="" onclick="window.location.href='addclass.php?ma_khoa_hoc=<?php echo $_GET["ma_khoa_hoc"];?>'">Thêm </button>
+        <button  style="margin:auto" class="btn btn-default" href="" id="" onclick="window.location.href='addcoupon.php'">Thêm </button>
 
     </div>
     <!-- ============================================================== -->

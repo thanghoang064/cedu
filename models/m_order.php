@@ -33,6 +33,12 @@ class M_oder extends database {
         $this->setQuery($sql);
         return $this->loadRow(array($ma_nguoi_dung,$tinh_trang));
     }
+    public function  Edit_room($ma_lop,$so_cho)
+    {
+        $sql="update lop set so_cho =?  Where ma_lop=?";
+        $this->setQuery($sql);
+        return $this->execute(array($so_cho,$ma_lop));
+    }
 
 }
 ?>

@@ -53,8 +53,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="d-none d-md-block"><?php
-                            if(isset($_SESSION["fullname"])) {
-                                echo $_SESSION["fullname"];
+                            if(isset($_SESSION['user_admin'])) {
+                                echo $_SESSION['user_admin']->ho_ten;
                             }
                             ?> </span>
 

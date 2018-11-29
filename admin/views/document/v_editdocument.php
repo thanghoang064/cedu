@@ -2,7 +2,7 @@
 <div id="main-wrapper">
     <div class="content-heading text-center" style="margin-right: 57%;">
         <!--        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='category.php'">Quay lại </button>-->
-        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='rate.php'">Quay lại </button>
+        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='document.php'">Quay lại </button>
     </div>
     <div class="page-wrapper">
         <div class="container-fluid">

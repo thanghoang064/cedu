@@ -1,9 +1,9 @@
-
 <div id="main-wrapper">
     <div class="content-heading text-center" style="margin-right: 57%;">
         <!--        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='category.php'">Quay lại </button>-->
-        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='rate.php'">Quay lại </button>
+        <button  style="margin: auto" class="btn btn-default" onclick="window.location.href='banner.php'">Quay lại </button>
     </div>
+
     <div class="page-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -11,7 +11,8 @@
                     <div class="card">
                         <form class="form-horizontal" id="" enctype="multipart/form-data" method="post" action="">
                             <div class="card-body">
-                                <h4 class="card-title">Thêm tiêu đề</h4>
+
+                                <h4 class="card-title">
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Tên tiêu đề</label>
                                     <div class="col-sm-9">

@@ -6,15 +6,13 @@ class C_registration{
     {
         $m_registration = new M_registration();
         if (isset($_POST["btnSave"])) {
-
             //`ma_nguoi_dung`, `email`, `ho_ten`, `password`, `phone`, `hinh`, `trang_thai`, `ma_quyen`
             //$ma_loai =0;
-
             $ma_nguoi_dung = NULL;
             $email = $_POST["email"];
             $ho_ten = $_POST["ho_ten"];
             $password = md5($_POST["password"]);
-            $confirm_password = $_POST["confirm_password"];
+            $confirm_password = md5($_POST["confirm_password"]);
 
             $phone = $_POST["phone"];
             $hinh = "";

@@ -1,5 +1,5 @@
 <?php
-//@session_start();
+@session_start();
 class C_couse{
 
     public function show_document()
@@ -8,8 +8,10 @@ class C_couse{
 
 
         $m_couse = new M_couse();
-
-        $couses = $m_couse->read_couse_by_id_user(2);
+        if (isset($_SESSION["user"])) {
+          $ma_nguoi_dung = $_SESSION["user"]->ma_nguoi_dung;
+        }
+        $couses = $m_couse->read_couse_by_id_user($ma_nguoi_dung);
         if(isset($_POST["btnTimKiem"]))
         {
             $documents = $m_couse->read_document_by_idcouse($_POST["ma_khoa_hoc"]);
@@ -20,6 +22,27 @@ class C_couse{
         $view = 'views/document/v_document.php';
         include 'templates/layout.php';
 
+        //  $view = 'view/products/'
+    }
+    public function show_couseoder()
+    {
+        include ("models/m_couse.php");
+
+
+        $m_couse = new M_couse();
+        if (isset($_SESSION["user"])) {
+            $ma_nguoi_dung = $_SESSION["user"]->ma_nguoi_dung;
+        }
+        $couses_o = $m_couse->read_couseoder($ma_nguoi_dung);
+//        if(isset($_POST["btnTimKiem"]))
+//        {
+//            $documents = $m_couse->read_document_by_idcouse($_POST["ma_khoa_hoc"]);
+//            $view = 'views/document/v_document.php';
+//            include 'templates/layout.php';
+//            return;
+//        }
+        $view = 'views/couseoder/v_couseoder.php';
+        include 'templates/layout.php';
         //  $view = 'view/products/'
     }
     public  function show_singe_couse()

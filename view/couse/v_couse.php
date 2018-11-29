@@ -41,14 +41,9 @@
                                         </div>
                                         <div class="courses-content-wrapper">
                                             <h3 class="item-title"><a href="singer.php?ma_khoa_hoc=<?php echo $couses[$j]->ma_khoa_hoc; ?>&ma_loai=<?php echo $couses[$j]->ma_loai; ?>"><?php echo $couses[$j]->ten_khoa_hoc;?></a></h3>
-                                            <p class="item-content">Rmply dummy text printing setting industry it’s free demo.</p>
                                             <ul class="courses-info">
-                                                <li>3 Months
-                                                    <br><span> Course</span></li>
-                                                <li>30
-                                                    <br><span> Classes</span></li>
-                                                <li>10 am - 11 am
-                                                    <br><span> Classes</span></li>
+                                                Thời gian học:
+                                                <li><?php echo $couses[$j]->thoi_gian; ?> Tuần</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -227,12 +222,10 @@
                 <div class="sidebar">
                     <div class="sidebar-box">
                         <div class="sidebar-box-inner">
-                            <h3 class="sidebar-title">Find your Course</h3>
+                            <h3 class="sidebar-title">Tìm khóa học</h3>
                             <div class="sidebar-find-course">
                                 <form id="checkout-form" method="post">
-                                    <div class="form-group course-name">
-                                        <input id="first-name" placeholder="Course Name" class="form-control" type="text" />
-                                    </div>
+
                                     <div class="form-group">
                                         <div class="custom-select">
                                             <select id="ten_khoa_hoc" name="ten_khoa_hoc" class='select2'>
