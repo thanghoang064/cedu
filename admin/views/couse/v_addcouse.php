@@ -12,6 +12,11 @@
                     <div class="card">
                         <form class="form-horizontal" id="form_addcouse" method="post" enctype="multipart/form-data" action="addcouse.php">
                             <div class="card-body">
+                                <?php
+                                if(!empty($error)) echo "<div class=\"alert alert-danger\">
+  <strong></strong> ".$error."
+</div>";
+                                ?>
                                 <input type="hidden" class="form-control" id="ma_loai" name="ma_loai"  placeholder="" value="<?php echo $_GET['ma_loai'];?>">
                                 <h4 class="card-title">Danh mục : <?php echo $category->ten_loai; ?></h4>
                                 <div class="form-group row">
@@ -23,7 +28,7 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Thời gian học</label>
                                     <div class="col-sm-9">
-                                            <input type="number" class="form-control" id="thoi_gian" name="thoi_gian"  placeholder="" required>
+                                            <input min="0" type="number" class="form-control" id="thoi_gian" name="thoi_gian"  placeholder="" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -52,7 +57,7 @@
                             <div class="form-group row">
                                 <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Học phí</label>
                                 <div class="col-sm-9">
-                                    <input type="number" class="form-control" id="hoc_phi" name="hoc_phi"  placeholder="" required>
+                                    <input type="number" min="0" class="form-control" id="hoc_phi" name="hoc_phi"  placeholder="" required>
 
                                 </div>
                             </div>

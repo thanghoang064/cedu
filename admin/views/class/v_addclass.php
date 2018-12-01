@@ -12,6 +12,11 @@
                         <form class="form-horizontal" id="form_addclass" method="post" action="addclass.php">
                             <div class="card-body">
                                 <h4 class="card-title">Thêm lớp </h4>
+                                <?php
+                                if(!empty($error)) echo "<div class=\"alert alert-danger\">
+  <strong></strong> ".$error."
+</div>";
+                                ?>
                                 <div class="form-group row">
                                     <input type="hidden" class="form-control" id="ma_khoa_hoc" name="ma_khoa_hoc"  placeholder="" value="<?php echo $_GET['ma_khoa_hoc'];?>">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Tên lớp</label>
@@ -55,7 +60,7 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Số chỗ</label>
                                     <div class="col-sm-9">
-                                        <input type="number" class="form-control" id="so_cho" name="so_cho"  placeholder=""  required>
+                                        <input min="0" type="number" class="form-control" id="so_cho" name="so_cho"  placeholder=""  required>
                                     </div>
                                 </div>
                             </div>

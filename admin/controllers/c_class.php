@@ -39,7 +39,13 @@ class C_class{
             $ma_gv = $_POST['ten_gv'];
             $trang_thai = 1;
             $so_cho = $_POST['so_cho'];
+            $kq1 = $m_class->return_class_by_name($ten_lop);
+            if ($kq1->KQ>0)
+            {
+                $error = "Tên lớp đã bị trùng!";
 
+            }
+            else{
             // $ngay_tao = date_format($ngay, "Y-m-d");
             //echo $ngay;
             $kq = $m_class->Insert_class($ma_lop, $ten_lop, $ca_hoc, $ngay_khai_giang, $dia_diem_hoc, $ma_khoa_hoc,$ma_gv,$trang_thai,$so_cho);
@@ -48,6 +54,7 @@ class C_class{
                 echo "<script>window.location='class.php?ma_khoa_hoc=" . $ma_khoa_hoc . "'</script>";
             } else {
                 echo "<script>alert('Thêm không thành công')</script>";
+            }
             }
         }
         // View

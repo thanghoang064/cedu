@@ -39,6 +39,12 @@ class M_oder extends database {
         $this->setQuery($sql);
         return $this->execute(array($so_cho,$ma_lop));
     }
+    public function read_class_by_idclass($ma_lop)
+    {
+        $sql = "select*from lop where ma_lop  = ?";
+        $this->setQuery($sql);
+        return $this->loadRow(array($ma_lop));
+    }
 
 }
 ?>

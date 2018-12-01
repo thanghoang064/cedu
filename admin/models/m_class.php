@@ -46,6 +46,12 @@ class M_class extends database{
         $this->setQuery($sql);
         return $this->execute(array($ma_lop));
     }
+    public function return_class_by_name($ten_lop)
+    {
+        $sql = "SELECT COUNT(*) as KQ FROM lop WHERE ten_lop = ?";
+        $this->setQuery($sql);
+        return $this->loadRow(array($ten_lop));
+    }
 
 
 

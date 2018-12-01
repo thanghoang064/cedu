@@ -1,13 +1,15 @@
 <!-- Registration Page Area Start Here -->
 <div class="registration-page-area bg-secondary">
     <div class="container">
-        <h2 class="sidebar-title">Registration</h2>
+        <h2 class="sidebar-title">Đăng ký tài khoản</h2>
         <div class="registration-details-area inner-page-padding">
             <form id="checkout-form" method="post">
                 <?php
-                if(!empty($error)) echo "<div class=\"alert alert-danger\">
-  <strong>Danger!</strong> ".$error."
-</div>";
+                include_once 'view/error.php';
+                $errorClass = new CError();
+                $errorClass->showError($error_1);
+                $errorClass->showError($success);
+                //Error::showError($error_1);
                 ?>
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

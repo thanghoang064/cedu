@@ -38,7 +38,7 @@ class C_couse{
             //$ma_loai =0;
             $ma_loai = $_POST['ma_loai'];
             $ma_khoa_hoc = NULL;
-            $ten_khoa_hoc = $_POST["ten_khoa_hoc"];
+            $ten_khoa_hoc = preg_replace('!\s+!', ' ', $_POST["ten_khoa_hoc"]);
 
             $thoi_gian = $_POST["thoi_gian"];
             $thong_tin_khoa_hoc = $_POST["thong_tin_khoa_hoc"];
@@ -46,18 +46,23 @@ class C_couse{
             $hinh = $_FILES["f_hinh"]["error"] == 0 ? $_FILES["f_hinh"]["name"] : "";
             $hoc_phi = $_POST["hoc_phi"];
             $trang_thai = 1;
-          //  $ngay_tao = date('Y-m-d', time());
-            // $ngay_tao = date_format($ngay, "Y-m-d");
-            //echo $ngay;
-           $kq = $m_couse->Insert_couse($ma_khoa_hoc, $ten_khoa_hoc, $ma_loai, $thoi_gian, $thong_tin_khoa_hoc, $ke_hoach_hoc_tap, $hinh, $hoc_phi, $trang_thai);
+          $kq1 = $m_couse->return_couse_by_name($ten_khoa_hoc);
+            if ($kq1->KQ>0)
+            {
+                $error = "Tên khóa học đã bị trùng!";
 
-            if ($kq) {
-                if ($hinh != "") {
-                    move_uploaded_file($_FILES["f_hinh"]["tmp_name"], "../public/layout/imagescouse/$hinh");
+            }
+            else {
+                $kq = $m_couse->Insert_couse($ma_khoa_hoc, $ten_khoa_hoc, $ma_loai, $thoi_gian, $thong_tin_khoa_hoc, $ke_hoach_hoc_tap, $hinh, $hoc_phi, $trang_thai);
+
+                if ($kq) {
+                    if ($hinh != "") {
+                        move_uploaded_file($_FILES["f_hinh"]["tmp_name"], "../public/layout/imagescouse/$hinh");
+                    }
+                    echo "<script>window.location='couse.php?ma_loai=" . $ma_loai . "'</script>";
+                } else {
+                    echo "<script>alert('Thêm không thành công')</script>";
                 }
-                echo "<script>window.location='couse.php?ma_loai=" . $ma_loai . "'</script>";
-            } else {
-                echo "<script>alert('Thêm không thành công')</script>";
             }
         }
         // View

@@ -59,7 +59,7 @@ session_start();
                                                 <input type="text" placeholder="E-mail" name="ten_dang_nhap"  required/>
                                                 <label>Mật khẩu *</label>
                                                 <input type="password" placeholder="Mật khẩu" name="mat_khau" required/>
-                                                <label class="check">Bạn chưa có tài khoản?</label>
+                                                <label class="check">Bạn chưa có tài khoản?<a href="registration.php">Đăng kí ngay</a></label>
                                                 <button class="default-big-btn" type="submit" name="login" value="Login">Đăng nhập</button>
                                                 <button class="default-big-btn form-cancel" type="submit" value="">Hủy</button>
                                             </form>

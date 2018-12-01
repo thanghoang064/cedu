@@ -201,6 +201,8 @@ class C_order{
         $ngay_dk = date('Y-m-d', time());
         $m_oder->addOderCouse($ma_dk, $ngay_dk,$giatien,$ma_lop,$ma_nguoi_dung,1);
         $this->sendMail($ma_nguoi_dung,$ma_lop);
+        $class = $m_oder->read_class_by_idclass($ma_lop);
+        $m_oder->Edit_room($ma_lop, $class->so_cho - 1);
         $view = 'view/order/v_ordersuccess.php';
         include('templates/order/layout.php');
 //        echo "<pre>";

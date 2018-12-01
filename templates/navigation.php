@@ -1,13 +1,7 @@
 
 <nav id="desktop-nav">
     <ul>
-        <li class="active"><a href="#">Trang chủ</a>
-            <ul>
-                <li class="active"><a href="index.html">Home 1</a></li>
-                <li><a href="index2.html">Home 2</a></li>
-                <li><a href="index3.html">Home 3</a></li>
-                <li><a href="index4.html">Home 4</a></li>
-            </ul>
+        <li class="active"><a href="index.php">Trang chủ</a>
         </li>
 
         <?php
@@ -26,13 +20,8 @@
                 ?>
             </ul>
         </li>
-        <li><a href="#">Giảng viên</a>
-            <ul>
-                <li><a href="research1.html">Research 1</a></li>
-                <li><a href="research2.html">Research 2</a></li>
-                <li><a href="research3.html">Research 3</a></li>
-                <li><a href="single-research.html">Research Details</a></li>
-            </ul>
+        <li><a href="teacher.php">Giảng viên</a>
+
         </li>
         <?php
         $category_news = Helper::loadMenu_news();
@@ -50,10 +39,6 @@
             </ul>
         </li>
         <li><a href="#">Liên hệ</a>
-            <ul>
-                <li><a href="contact1.html">Contact 1</a></li>
-                <li><a href="contact2.html">Contact 2</a></li>
-            </ul>
         </li>
 
     </ul>
