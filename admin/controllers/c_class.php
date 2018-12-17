@@ -68,21 +68,14 @@ class C_class{
         // Models
         if(isset($_GET["ma_lop"]))
         {
-
             $ma_lop=$_GET["ma_lop"];
-
             $m_class=new M_class();
-
             $class  =$m_class->read_class_by_idclass($ma_lop);
             $m_teacher = new M_teacher();
             $teachers = $m_teacher->read_teacher_active();
             // Cập nhật
             if(isset($_POST["btnSave"]))
             {
-
-
-                //    $ma_khoa_hoc, $ten_khoa_hoc, $ten_gv, $thoi_gian_hoc,$thong_tin_khoa_hoc,$ke_hoach_hoc_tap,$khoa_hoc_moi,$hinh,$don_gia,$ngay_tao
-
                 $ten_lop = $_POST['ten_lop'];
                 $ca_hoc =$_POST['ca_hoc'];
                 $ngay_bd = date_create($_POST["ngay_khai_giang"]);
@@ -92,10 +85,8 @@ class C_class{
                 $ma_gv = $_POST['ten_gv'];
                 $trang_thai = $_POST['trang_thai'];
                 $so_cho = $_POST['so_cho'];
-
                 // $m_san_pham=new M_san_pham();
                 $kq=$m_class->Edit_class($ma_lop, $ten_lop, $ca_hoc,$thoi_gian_khai_giang,$dia_diem_hoc,$ma_gv,$trang_thai,$so_cho);
-
                 if($kq)
                 {
 

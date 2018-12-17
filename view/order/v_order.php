@@ -67,18 +67,6 @@
                             <div role="tabpanel" class="tab-pane" id="profile">Số tài khoản: 0071000944930 VIETCOMBANK - HOANG QUANG THANG</div>
                             <div role="tabpanel" class="tab-pane" id="messages">
                                 <h3>Thanh toán trực tuyến bằng thẻ visa</h3>
-<!--                                <form action="charge.php" method="POST" id="payment_form">-->
-<!--                                    <input type="hidden" name="ma_lop" value="--><?php //echo $_GET["ma_lop"];?><!--">-->
-<!--                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"-->
-<!--                                            data-key="pk_test_RktRYcffDgayxWK6b7Gho9Ol"-->
-<!--                                            data-description="Access for a year"-->
-<!--                                            data-amount="--><?php //echo ($couse->hoc_phi/20000)*100;?><!--"-->
-<!--                                            data-locale="auto"-->
-<!--                                            id="stripe-script"-->
-<!--                                            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"-->
-<!--                                    >-->
-<!--                                    </script>-->
-<!--                                </form>-->
                                 <form id="myForm" action="charge.php" method="POST">
                                     <input type="hidden" name="ma_lop" value="<?php echo $_GET["ma_lop"];?>">
                                     <input type="hidden" id="stripeToken" name="stripeToken" />
@@ -141,19 +129,19 @@
             let moneyStripe = 0;
             let money = +$("#txtMoney").val();
             let discount = +$(".txtDiscount").val();
+
             if(discount != 0) {
                 moneyStripe = discount / 200;
-                console.log(1);
             }
             else {
                 moneyStripe = money / 200;
-                console.log(2);
             }
             var amountInCents = Math.floor(moneyStripe);
             var displayAmount = parseFloat(Math.floor(moneyStripe)).toFixed(2);
+
             handler.open({
                 name: 'Demo Site',
-                description: 'Custom amount ($' + displayAmount + ')',
+                description: 'Custom amount ($' + displayAmount/100 + ')',
                 amount: amountInCents,
             });
         })
@@ -179,6 +167,7 @@
             }
 
         });
+
         $("#btnXacNhan").click(function() {
             $("#result").hide();
             var coupon = $('#txtCoupon').val();

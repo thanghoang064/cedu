@@ -63,11 +63,7 @@ class C_banner
         $m_banner = new M_banner();
         if(isset($_GET["ma_tieu_de"]))
         {
-
             $ma_tieu_de=$_GET["ma_tieu_de"];
-
-
-
             $banner  =$m_banner->read_banner_by_idbanner($ma_tieu_de);
             // Cập nhật
             if(isset($_POST["btnSave"]))

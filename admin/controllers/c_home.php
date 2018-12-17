@@ -7,6 +7,10 @@ class C_home
         include_once("models/m_oder.php");
         $m_oder=new M_oder();
         $hoa_don=$m_oder->statistic_oder();
+        $ct = $m_oder->count_teacher();
+        $cc = $m_oder->count_couse();
+        $cs = $m_oder->count_students();
+        $kq = $m_oder->count_studentresgitertoday();
         $thang=array();
         $tong=array();
 

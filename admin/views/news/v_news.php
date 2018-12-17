@@ -63,6 +63,7 @@
                                             <td><?php echo $ns->mo_ta_ngan;?> </td>
                                             <td><img src="../public/layout/imagesnews/<?php echo $ns->hinh;?>" width="80px"/></td>
                                             <td><?php echo $ns->noi_dung;?> </td>
+
                                             <td><span style="margin-right: 15%;"
                                                       class="badge badge-pill badge-<?php if($ns->trang_thai==1)
                                                       {

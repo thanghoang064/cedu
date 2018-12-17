@@ -46,8 +46,8 @@
                     <div class="footer-box">
                         <h3>Information</h3>
                         <ul class="corporate-address">
-                            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="Phone(01)800433633.html"> (01) 800 433 633 </a></li>
-                            <li><i class="fa fa-envelope-o" aria-hidden="true"></i>info@bostonea.com</li>
+                            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="Phone(01)800433633.html">0948061238 </a></li>
+                            <li><i class="fa fa-envelope-o" aria-hidden="true"></i>thanghoang064@gmail.com</li>
                         </ul>
                         <div class="newsletter-area">
                             <h3>Newsletter</h3>

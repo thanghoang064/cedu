@@ -33,7 +33,7 @@ class C_order{
             {
                 $ma_lop = $_GET["ma_lop"];
             }
-                $tinh_trang = 0;
+            $tinh_trang = 0;
             $m_oder = new M_oder();
             $m_user = new M_user();
 
@@ -54,8 +54,8 @@ class C_order{
                     $gia_tien = $couse->hoc_phi;
                 }
             }
-            $m_oder->addOderCouse($ma_dk, $ngay_dk,$gia_tien,$ma_lop,$ma_nguoi_dung,$tinh_trang);
-            $this->sendMail($ma_nguoi_dung,$ma_lop);
+            $orderID = $m_oder->addOderCouse($ma_dk, $ngay_dk,$gia_tien,$ma_lop,$ma_nguoi_dung,$tinh_trang);
+            $this->sendMail($ma_nguoi_dung,$ma_lop, 0, $gia_tien);
             $view = 'view/order/v_ordersuccess.php';
             include('templates/order/layout.php');
            // $couse = $m_oder->read_couse_by_idclass($ma_lop);
@@ -82,14 +82,14 @@ class C_order{
 
     }
 
-    function sendMail($ma_nguoi_dung,$ma_lop)
+    function sendMail($ma_nguoi_dung,$ma_lop, $status, $giaTien)
     {
         require_once("libs/Helper.php");
         $m_oder = new M_oder();
         $m_user = new M_user();
         $user = $m_user->read_user_by_iduser($ma_nguoi_dung);
         $couse = $m_oder->read_couse_by_idclass($ma_lop);
-        $status = $couse->tinh_trang == 0 ? 'Chưa thanh toán' : 'Đã thanh toán';
+        $status = $status === 0 ? 'Chưa thanh toán' : 'Đã thanh toán';
         $tieu_de = "Liên hệ";
         $xhtml = "<p><strong>Tên khóa học: ".$couse->ten_khoa_hoc."</strong></p>";
         $xhtml .= "<p><strong>Trạng thái: ".$status."</strong></p>";
@@ -110,7 +110,7 @@ class C_order{
         $xhtml .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px'>". $couse->ca_hoc ."</td>";
         $xhtml .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px'>". $couse->thoi_gian_khai_giang ."</td>";
         $xhtml .= "<td style='border: 1px solid #dddddd; text-align: left; padding: 8px'>". $couse->dia_diem_hoc ."</td></tr></table>";
-        $xhtml .= "<p style='text-align: right'><strong>Tổng tiền: ".$couse->don_gia."</strong></p>";
+        $xhtml .= "<p style='text-align: right'><strong>Tổng tiền: ".number_format($giaTien)."</strong></p>";
         $noi_dung_mail = "<b>Từ: </b>ABCD<p/><b>Email:</b>ABCD<p/>Đăng kí khóa học .$couse->ten_khoa_hoc.thành công!";
 
         $kq=Helper::Gui_mail_lien_he($tieu_de,$xhtml,$user->email);
@@ -199,8 +199,8 @@ class C_order{
         $ma_dk = null;
 
         $ngay_dk = date('Y-m-d', time());
-        $m_oder->addOderCouse($ma_dk, $ngay_dk,$giatien,$ma_lop,$ma_nguoi_dung,1);
-        $this->sendMail($ma_nguoi_dung,$ma_lop);
+        $orderItem = $m_oder->addOderCouse($ma_dk, $ngay_dk,$giatien,$ma_lop,$ma_nguoi_dung,1);
+        $this->sendMail($ma_nguoi_dung,$ma_lop, 1, $giatien);
         $class = $m_oder->read_class_by_idclass($ma_lop);
         $m_oder->Edit_room($ma_lop, $class->so_cho - 1);
         $view = 'view/order/v_ordersuccess.php';

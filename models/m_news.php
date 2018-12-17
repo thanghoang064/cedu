@@ -40,7 +40,7 @@ class M_news extends database{
     }
     public function read_news_by_latesthome()
     {
-        $sql = "SELECT * FROM `tin_tuc`  ORDER BY ngay_tao desc LIMIT 0, 4";
+        $sql = "SELECT * FROM `tin_tuc` where trang_thai = 1 ORDER BY ngay_tao desc LIMIT 0, 4 ";
         $this->setQuery($sql);
         return $this->loadAllRows();
     }

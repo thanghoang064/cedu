@@ -31,7 +31,7 @@ class M_couse extends database{
     }
     public function read_couse_by_category($ma_loai, $vt = -1, $limit = -1)
     {
-        $sql = "select * from khoa_hoc where ma_loai = ?";
+        $sql = "select * from khoa_hoc where ma_loai = ? and trang_thai = 1";
         if ($vt >= 0 && $limit > 0) {
             $sql .= " limit $vt,$limit";
         }
@@ -60,7 +60,7 @@ class M_couse extends database{
     public function Read_couse_new($vt = -1, $limit = -1)
     {
         //$vt = -1, $limit = -1
-        $sql = "SELECT lop.*, khoa_hoc.ten_khoa_hoc FROM lop, khoa_hoc WHERE khoa_hoc.ma_khoa_hoc = lop.ma_khoa_hoc AND DATE(thoi_gian_khai_giang) > DATE(NOW()) and DATE(thoi_gian_khai_giang) <= DATE_ADD(NOW(), INTERVAL 1 MONTH) order by thoi_gian_khai_giang ";
+        $sql = "SELECT lop.*, khoa_hoc.ten_khoa_hoc FROM lop, khoa_hoc WHERE khoa_hoc.ma_khoa_hoc = lop.ma_khoa_hoc AND DATE(thoi_gian_khai_giang) > DATE(NOW()) and DATE(thoi_gian_khai_giang) <= DATE_ADD(NOW(), INTERVAL 1 MONTH) and lop.trang_thai = 1 order by thoi_gian_khai_giang ";
         if ($vt >= 0 && $limit > 0) {
             $sql .= " limit $vt,$limit";
         }

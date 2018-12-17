@@ -2,6 +2,31 @@
 require_once ("database.php");
 class M_oder extends database{
 
+    public function count_teacher()
+    {
+        $sql = "select count(*) as CT from giang_vien ";
+        $this->setQuery($sql);
+        return $this->loadRow();
+    }
+
+    public function count_studentresgitertoday()
+    {
+        $sql = "SELECT COUNT(DISTINCT ma_nguoi_dung) as KQ FROM `dang_ki` WHERE ngay_dk = DATE(NOW()) GROUP BY ma_nguoi_dung";
+        $this->setQuery($sql);
+        return $this->loadRow();
+    }
+    public function count_couse()
+    {
+        $sql = "select count(*) as CC from khoa_hoc ";
+        $this->setQuery($sql);
+        return $this->loadRow();
+    }
+    public function count_students()
+    {
+        $sql = "select count(*) as CS from nguoi_dung where ma_quyen = 2";
+        $this->setQuery($sql);
+        return $this->loadRow();
+    }
 
     public function statistic_oder()
     {

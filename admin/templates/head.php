@@ -7,12 +7,11 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="public/assets/images/favicon.png">
-    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <title>Trang quản lý khóa học</title>
     <!-- Custom CSS -->
     <link href="public/assets/libs/flot/css/float-chart.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="public/dist/css/style.min.css" rel="stylesheet">
-    <link href="public/dist/css/edit.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="public/assets/extra-libs/multicheck/multicheck.css">
     <link href="public/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
     <link href="public/dist/css/style.min.css" rel="stylesheet">
@@ -22,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="public/assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <link rel="stylesheet" type="text/css" href="public/assets/libs/quill/dist/quill.snow.css">
     <link href="public/dist/css/jquery.loading.min.css" rel="stylesheet">
+    <link href="public/dist/css/edit.css" rel="stylesheet">
     <script type="text/javascript" src="public/dist/js/Chart.bundle.js"></script>
     <script type="text/javascript" src="public/dist/js/Chart.js"></script>
     <script src="public/assets/libs/jquery/dist/jquery.min.js"></script>

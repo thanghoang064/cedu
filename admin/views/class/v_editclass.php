@@ -42,7 +42,7 @@
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Ngày khai giảng</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="ngay_khai_giang" name="ngay_khai_giang"  value="<?php echo date('m-d-Y', strtotime($class->thoi_gian_khai_giang));?>" placeholder="" readonly required>
+                                        <input type="text" class="form-control" id="ngay_khai_giang" name="ngay_khai_giang"  value="<?php echo date('Y-m-d', strtotime($class->thoi_gian_khai_giang));?>" placeholder="" readonly required>
                                     </div>
                                 </div>
                                 <div class="form-group row">

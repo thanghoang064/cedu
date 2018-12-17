@@ -17,18 +17,11 @@ class M_user extends database
     function luu_dang_nhap($ten,$mk)
     {
         $user = $this->read_user_by_id_pass($ten,$mk);
-        if(isset($user->ma_quyen))
+        if(isset($user->ma_quyen) && $user->ma_quyen == 2)
         {
             $_SESSION['user'] = $user;
-            if($user->ma_quyen == 2) {
-                $selfURL = explode("/", $_SERVER['REQUEST_URI']);
-                echo "<script type='text/javascript'>window.location.href = '". $selfURL[2] ."'</script>";
-            }
-            else
-            {
-                $flag = true;
-                unset($_SESSION["user"]);
-            }
+            $selfURL = explode("/", $_SERVER['REQUEST_URI']);
+            echo "<script type='text/javascript'>window.location.href = '". $selfURL[2] ."'</script>";
         }
 
         else

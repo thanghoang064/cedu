@@ -6,6 +6,7 @@ class M_oder extends database {
         $query = "INSERT INTO dang_ki(ma_dk, ngay_dk,gia_tien,ma_lop,ma_nguoi_dung,tinh_trang) VALUES(?,?,?,?,?,?)";
         $this->setQuery($query);
         $this->execute(array($ma_dk, $ngay_dk,$gia_tien,$ma_lop,$ma_nguoi_dung,$tinh_trang));
+        return $this->getLastId();
     }
     /* `ho_ten`, `dia_chi`, `email`, `ghi_chu`, `so_dien_thoai`, `ma_khoa_hoc`*/
     public function read_couse_by_idcouse($ma_khoa_hoc)
@@ -16,6 +17,12 @@ class M_oder extends database {
     }
 
     public function read_couse_by_idclass($ma_lop)
+    {
+        $sql = "SELECT * FROM lop as l,khoa_hoc as kh WHERE l.ma_khoa_hoc = kh.ma_khoa_hoc AND l.ma_lop = ?";
+        $this->setQuery($sql);
+        return $this->loadRow(array($ma_lop));
+    }
+    public function read_oder_by_idoder($ma_lop)
     {
         $sql = "SELECT * FROM lop as l,khoa_hoc as kh WHERE l.ma_khoa_hoc = kh.ma_khoa_hoc AND l.ma_lop = ?";
         $this->setQuery($sql);

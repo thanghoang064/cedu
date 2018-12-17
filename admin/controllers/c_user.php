@@ -127,16 +127,14 @@ class C_user
            // $users = $m_user->read_user_by_nameuser($ten);
             //die();
             $mk=$_POST["mat_khau"];
-
             $this->luu_dang_nhap($ten,$mk);
             $users = $m_user->read_user_by_email($ten);
-
-
         }
         if(isset($_SESSION['user_admin']))
         {
             if($_SESSION['user_admin']->ma_quyen==1) {
-                include('templates/layout.php');
+                //include('templates/layout.php');
+                header("location:home.php");
             }
 
             else
