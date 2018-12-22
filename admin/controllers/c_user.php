@@ -169,7 +169,8 @@ class C_user
     }
     function thoat_dang_nhap()
     {
-        session_destroy();
+      //  session_destroy();
+        unset($_SESSION['user_admin']);
         header("location:login.php");
     }
 
@@ -177,7 +178,9 @@ class C_user
     {
         $m_user=new M_user();
         $user = $m_user->read_user_by_id_pass($ten,$mk);
-        $_SESSION['user_admin'] = $user;
+        if(!empty($user)) {
+            $_SESSION['user_admin'] = $user;
+        }
     }
 
 }

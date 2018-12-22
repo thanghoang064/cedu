@@ -71,7 +71,7 @@ class M_couse extends database{
 //SELECT * FROM lop,giang_vien WHERE lop.ma_gv = giang_vien.ma_gv AND lop.ma_khoa_hoc = 25
     public function read_class_and_teacher_by_idcouse($ma_khoa_hoc)
     {
-        $sql = "SELECT * FROM lop,giang_vien WHERE lop.ma_gv = giang_vien.ma_gv AND lop.ma_khoa_hoc = ".$ma_khoa_hoc;
+        $sql = "SELECT lop.*, giang_vien.ten_gv FROM lop,giang_vien WHERE lop.ma_gv = giang_vien.ma_gv AND lop.ma_khoa_hoc = ".$ma_khoa_hoc;
         $this->setQuery($sql);
         return $this->loadAllRows();
     }

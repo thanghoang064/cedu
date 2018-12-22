@@ -12,6 +12,13 @@
                         <form class="form-horizontal" id="form_addteacher" enctype="multipart/form-data" method="post" action="">
                             <div class="card-body">
                                 <h4 class="card-title">Thêm giảng viên</h4>
+                                <?php
+                                include_once 'views/error1.php';
+                                $errorClass = new CError();
+                                $errorClass->showError($error_1);
+                            //    $errorClass->showError($success);
+                                //Error::showError($error_1);
+                                ?>
                                 <div class="form-group row">
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Tên giảng viên</label>
                                     <div class="col-sm-9">
@@ -33,6 +40,18 @@
                                     <label for="cono1" class="col-sm-3 text-right control-label col-form-label" >Thông tin giảng viên </label>
                                     <div class="col-sm-9">
                                         <textarea  name="thongtin_gv" class="form-control" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="email" name="email"  placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">password</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="password" name="password"  placeholder="" required>
                                     </div>
                                 </div>
 

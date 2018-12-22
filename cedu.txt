@@ -1,0 +1,687 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Dec 18, 2018 at 01:00 PM
+-- Server version: 5.6.38
+-- PHP Version: 7.2.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `cedu`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cam_nhan`
+--
+
+CREATE TABLE `cam_nhan` (
+  `ma_cam_nhan` int(11) NOT NULL,
+  `ten_cam_nhan` varchar(200) NOT NULL,
+  `ma_khoa_hoc` int(11) NOT NULL,
+  `ma_nguoi_dung` int(11) NOT NULL,
+  `trang_thai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cam_nhan`
+--
+
+INSERT INTO `cam_nhan` (`ma_cam_nhan`, `ten_cam_nhan`, `ma_khoa_hoc`, `ma_nguoi_dung`, `trang_thai`) VALUES
+(6, 'khóa học dễ hiểu giảng viên dạy hay và nhiệt tình ', 12, 12, 1),
+(7, 'khóa học dễ hiểu', 12, 13, 1),
+(8, 'hay dễ hiểu', 10, 14, 1),
+(9, 'ddddd', 12, 14, 0),
+(10, 'khóa học hay ', 12, 15, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dang_ki`
+--
+
+CREATE TABLE `dang_ki` (
+  `ma_dk` int(11) NOT NULL,
+  `ngay_dk` datetime NOT NULL,
+  `gia_tien` int(11) NOT NULL,
+  `ma_lop` int(11) NOT NULL,
+  `ma_nguoi_dung` int(11) DEFAULT NULL,
+  `tinh_trang` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `dang_ki`
+--
+
+INSERT INTO `dang_ki` (`ma_dk`, `ngay_dk`, `gia_tien`, `ma_lop`, `ma_nguoi_dung`, `tinh_trang`) VALUES
+(50, '2018-12-07 00:00:00', 1150000, 6, 12, 1),
+(51, '2019-02-28 00:00:00', 2300000, 6, 13, 1),
+(52, '2018-12-07 00:00:00', 2070000, 7, 12, 1),
+(53, '2017-08-01 00:00:00', 2300000, 6, 14, 1),
+(61, '2018-12-16 00:00:00', 10800000, 8, 14, 1),
+(62, '2018-12-16 00:00:00', 2070000, 7, 14, 0),
+(63, '2018-12-17 00:00:00', 2300000, 6, 15, 1),
+(64, '2018-12-17 00:00:00', 5400000, 8, 15, 1),
+(65, '2018-12-18 00:00:00', 12000000, 8, 16, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `danh_muc_khoa_hoc`
+--
+
+CREATE TABLE `danh_muc_khoa_hoc` (
+  `ma_loai` int(11) NOT NULL,
+  `ten_loai` varchar(200) NOT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `danh_muc_khoa_hoc`
+--
+
+INSERT INTO `danh_muc_khoa_hoc` (`ma_loai`, `ten_loai`, `trang_thai`) VALUES
+(23, 'Lập trình web', 0),
+(24, 'Lập trình di động', 0),
+(25, 'Thiết kế đồ họa', 0),
+(26, 'Lập trình cơ sở dữ liệu', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `danh_muc_tin_tuc`
+--
+
+CREATE TABLE `danh_muc_tin_tuc` (
+  `ma_danh_muc` int(11) NOT NULL,
+  `ten_danh_muc` varchar(200) NOT NULL,
+  `trang_thai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `danh_muc_tin_tuc`
+--
+
+INSERT INTO `danh_muc_tin_tuc` (`ma_danh_muc`, `ten_danh_muc`, `trang_thai`) VALUES
+(3, 'Tin hoạt động', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diem_thi`
+--
+
+CREATE TABLE `diem_thi` (
+  `ma_diem_thi` int(11) NOT NULL,
+  `ma_lop` int(11) NOT NULL,
+  `diem` float NOT NULL,
+  `ma_nguoi_dung` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `diem_thi`
+--
+
+INSERT INTO `diem_thi` (`ma_diem_thi`, `ma_lop`, `diem`, `ma_nguoi_dung`) VALUES
+(13, 6, 9, 12),
+(14, 6, 10, 13),
+(15, 6, 10, 14),
+(16, 6, 2, 15),
+(17, 8, 9, 16);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `giang_vien`
+--
+
+CREATE TABLE `giang_vien` (
+  `ma_gv` int(11) NOT NULL,
+  `ten_gv` varchar(200) NOT NULL,
+  `hinh_gv` varchar(200) NOT NULL,
+  `thongtin_gv` text NOT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `giang_vien`
+--
+
+INSERT INTO `giang_vien` (`ma_gv`, `ten_gv`, `hinh_gv`, `thongtin_gv`, `trang_thai`) VALUES
+(4, 'huỳnh văn phú', 'Dohoa-huynh-van-phuoc.jpg', 'giảng viên giỏi', 1),
+(5, 'Nguyễn Lưu Anh Tuấn ', 'nguyen luu anh tuan.jpg', 'giảng viên giỏi về java', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `khoa_hoc`
+--
+
+CREATE TABLE `khoa_hoc` (
+  `ma_khoa_hoc` int(11) NOT NULL,
+  `ten_khoa_hoc` varchar(200) NOT NULL,
+  `ma_loai` int(11) NOT NULL,
+  `thoi_gian` int(11) NOT NULL,
+  `thong_tin_khoa_hoc` text NOT NULL,
+  `ke_hoach_hoc_tap` text NOT NULL,
+  `hinh` varchar(200) NOT NULL,
+  `hoc_phi` int(11) NOT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `khoa_hoc`
+--
+
+INSERT INTO `khoa_hoc` (`ma_khoa_hoc`, `ten_khoa_hoc`, `ma_loai`, `thoi_gian`, `thong_tin_khoa_hoc`, `ke_hoach_hoc_tap`, `hinh`, `hoc_phi`, `trang_thai`) VALUES
+(10, 'Lập trình android ', 24, 9, 'Trong tháng 12, Hệ thống đào tạo CNTT T3H có nhiều chính sách hỗ trợ học phí cho học viên khi đăng ký tham gia khóa học, chi tiết:\r\n- Ưu đãi 45% học phí  gốc khi đăng ký học khóa học lập trình web với Java.\r\n- Giảm tiếp 100k khi đăng ký online.\r\n- Ưu đãi khi đăng ký học theo nhóm:\r\n      + Nhóm 2 người: 100k/ học viên\r\n      + Nhóm 3 - 4 người: 300k/ học viên\r\n      + Nhóm 5 người: 500k/ học viên\r\n      + Nhóm 6 - 7: 700k/ học viên', '- Làm chủ kiến thức về lập trình hướng đối tượng (OOP) trong Java core, từ đó ứng dụng ngay trong thực tế để giải quyết bài toán cụ thể.\r\n- Nắm vững cấu trúc câu lệnh trong ngôn ngữ lập trình Java.\r\n- Biết cách làm việc với tập tin, các đối tượng, hệ thống thư viện, các dạng lưu trữ tập hợp.\r\n- Nắm vững các câu lệnh điều khiển, truy vấn để tương tác cùng với CSDL để thao tác với ứng dụng web động.\r\n- Nắm vững mô hình MVC để xây dựng cấu trúc website ứng dụng tại các doanh nghiệp.', 'lap-trinh-android.png', 12000000, 1),
+(11, 'Lập trình ios', 24, 10, '- Tổng quan J2EE\r\n- Servlet, JSP\r\n- Am hiểu MVC với JSP và Servlet\r\n- Thiết kế cấu trúc dự án\r\n- Web Service', '- Tổng quan EJB\r\n- Entity Beans\r\n- Ngôn ngữ truy vấn Java Persistence\r\n- Spring MVC Framework\r\n- Spring MVC & Hibernate\r\n- Giới thiệu qua về Struts, JSF.', 'image_url.cover-480x270 (1).jpg', 3400000, 1),
+(12, 'Lập trình web java', 23, 1, ' Cài đặt môi trường với 1 trong 3 hệ quản trị CSDL như: MySQL; Oracle; SQL Server.\r\n- Làm quen với CSDL, vai trò của CSDL trong 1 dự án Web.', ' Cài đặt môi trường với 1 trong 3 hệ quản trị CSDL như: MySQL; Oracle; SQL Server.\r\n- Làm quen với CSDL, vai trò của CSDL trong 1 dự án Web.', 'Học-làm-web-bằng-java-cần-những-kiến-thức-gì.png', 2300000, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `khuyen_mai`
+--
+
+CREATE TABLE `khuyen_mai` (
+  `ma_khuyen_mai` int(11) NOT NULL,
+  `ten_khuyen_mai` varchar(200) NOT NULL,
+  `phan_tram_giam_gia` int(11) NOT NULL,
+  `ngay_bat_dau` date NOT NULL,
+  `ngay_ket_thuc` date NOT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `khuyen_mai`
+--
+
+INSERT INTO `khuyen_mai` (`ma_khuyen_mai`, `ten_khuyen_mai`, `phan_tram_giam_gia`, `ngay_bat_dau`, `ngay_ket_thuc`, `trang_thai`) VALUES
+(7, 'CHAOMUNGNHAGIAO1544166117', 50, '2018-12-04', '2019-12-26', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lien_he`
+--
+
+CREATE TABLE `lien_he` (
+  `ma_lien_he` int(11) NOT NULL,
+  `ho_ten` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `tieu_de` varchar(200) NOT NULL,
+  `noi_dung` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lop`
+--
+
+CREATE TABLE `lop` (
+  `ma_lop` int(11) NOT NULL,
+  `ten_lop` varchar(200) NOT NULL,
+  `ca_hoc` varchar(200) NOT NULL,
+  `thoi_gian_khai_giang` date NOT NULL,
+  `dia_diem_hoc` varchar(200) NOT NULL,
+  `ma_khoa_hoc` int(11) NOT NULL,
+  `ma_gv` int(11) NOT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT '1',
+  `so_cho` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `lop`
+--
+
+INSERT INTO `lop` (`ma_lop`, `ten_lop`, `ca_hoc`, `thoi_gian_khai_giang`, `dia_diem_hoc`, `ma_khoa_hoc`, `ma_gv`, `trang_thai`, `so_cho`) VALUES
+(6, 'NMNW_1234 123123123123123', '17h53-19-30 (2-4-6)', '2016-08-01', '124 Nguyễn Văn Cừ', 12, 4, 1, 21),
+(7, 'JSP1234', '19h50-20h50', '2018-12-21', '124 Nguyễn Văn Cừ', 12, 4, 1, 13),
+(8, 'MOBILE234', '17h30 - 19h45(3-5-7)', '2018-12-19', '124 Nguyễn Văn cừ', 10, 4, 1, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nguoi_dung`
+--
+
+CREATE TABLE `nguoi_dung` (
+  `ma_nguoi_dung` int(11) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `ho_ten` varchar(200) NOT NULL,
+  `password` varchar(200) NOT NULL,
+  `phone` varchar(200) NOT NULL,
+  `hinh` varchar(200) NOT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT '1',
+  `ma_quyen` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `nguoi_dung`
+--
+
+INSERT INTO `nguoi_dung` (`ma_nguoi_dung`, `email`, `ho_ten`, `password`, `phone`, `hinh`, `trang_thai`, `ma_quyen`) VALUES
+(1, 'thanghoang064@gmail.com', 'Hoàng Quang Thawng', '8fdac26fcab49316f28934423234984a', '0948061238', '', 1, 1),
+(12, 'thangquang0641@gmail.com', 'Nguyễn Võ Hoàng Duy', '202cb962ac59075b964b07152d234b70', '09838282828', '', 1, 2),
+(13, 'n14dccn023@student.ptithcm.edu.vn', 'Hoàng quang thắng', '8fdac26fcab49316f28934423234984a', '0948061238', '', 1, 2),
+(14, 'thangquang0641@gmail.com', 'abc', 'e10adc3949ba59abbe56e057f20f883e', '0943567890', '', 1, 2),
+(15, 'n14dccn146@student.ptithcm.edu.vn', 'Võ Tấn Phú', '202cb962ac59075b964b07152d234b70', '09423232423', '', 1, 2),
+(16, 'thangquang064@gmail.com', 'Hoàng Thắng', '8fdac26fcab49316f28934423234984a', '0948061238', '', 1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `quyen`
+--
+
+CREATE TABLE `quyen` (
+  `ma_quyen` int(11) NOT NULL,
+  `ten_quyen` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `quyen`
+--
+
+INSERT INTO `quyen` (`ma_quyen`, `ten_quyen`) VALUES
+(1, 'quản lý '),
+(2, 'học viên');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `san_pham_hoc_vien`
+--
+
+CREATE TABLE `san_pham_hoc_vien` (
+  `ma_sp` int(11) NOT NULL,
+  `ten_sp` varchar(200) NOT NULL,
+  `ma_lop` int(11) NOT NULL,
+  `thong_tin_san_pham` varchar(200) NOT NULL,
+  `hinh` varchar(200) NOT NULL,
+  `ma_nguoi_dung` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tai_lieu`
+--
+
+CREATE TABLE `tai_lieu` (
+  `ma_tai_lieu` int(11) NOT NULL,
+  `ma_khoa_hoc` int(11) NOT NULL,
+  `ten_tai_lieu` varchar(200) NOT NULL,
+  `mo_ta_tai_lieu` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tai_lieu`
+--
+
+INSERT INTO `tai_lieu` (`ma_tai_lieu`, `ma_khoa_hoc`, `ten_tai_lieu`, `mo_ta_tai_lieu`) VALUES
+(6, 12, '5.18 (2).cpp', 'tài liệu java - cpp'),
+(7, 10, '5.26 (2).cpp', 'code tài liệu về android'),
+(8, 10, 'export (45).xlsx', 'tài liệu excel về android');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `thong_bao`
+--
+
+CREATE TABLE `thong_bao` (
+  `ma_thong_bao` int(11) NOT NULL,
+  `noi_dung` text NOT NULL,
+  `ma_lop` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tieu_de`
+--
+
+CREATE TABLE `tieu_de` (
+  `ma_tieu_de` int(11) NOT NULL,
+  `ten_tieu_de` varchar(200) DEFAULT NULL,
+  `hinh` varchar(200) DEFAULT NULL,
+  `trang_thai` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tieu_de`
+--
+
+INSERT INTO `tieu_de` (`ma_tieu_de`, `ten_tieu_de`, `hinh`, `trang_thai`) VALUES
+(36, 'abc', 'marketing-online-cho-doanh-nghiep-vua-va-nho.png', 1),
+(37, 'abc', 'B1-E8-21-54-CE-39-4B-D7-5F-19-A0-44-D7-28-DE-CC.jpg', 1),
+(38, 'qweqweqe', 'tieude123.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tin_tuc`
+--
+
+CREATE TABLE `tin_tuc` (
+  `ma_tin_tuc` int(11) NOT NULL,
+  `ten_tin_tuc` varchar(200) NOT NULL,
+  `hinh` varchar(200) NOT NULL,
+  `mo_ta_ngan` varchar(200) NOT NULL,
+  `noi_dung` text NOT NULL,
+  `ma_danh_muc` int(11) NOT NULL,
+  `trang_thai` int(11) NOT NULL,
+  `ngay_tao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tin_tuc`
+--
+
+INSERT INTO `tin_tuc` (`ma_tin_tuc`, `ten_tin_tuc`, `hinh`, `mo_ta_ngan`, `noi_dung`, `ma_danh_muc`, `trang_thai`, `ngay_tao`) VALUES
+(6, '[TIN KHẨN] THÔNG BÁO NGHỈ BÃO - CƠN BÃO SỐ 9 (BÃO USAGI) ', 'minh-hoa-1542983057902851582243-crop-15429830630101520023094.jpg', 'Trung tâm Tin học - Trường ĐHSP TP.HCM trân trọng thông báo:  Cơn bão số 9 (Bão Usagi) đang có những diễn biến phức tạp, có thể ảnh hưởng trực tiếp đến khu vực Thành phố Hồ Chí Minh. Để đảm bảo an toà', 'Thời gian: kể từ 12h ngày 24/11/2018 đến hết ngày 25/11/2018.\r\n\r\n+ Thông báo đến toàn thể học viên nghỉ tránh bão theo thời gian như trên.\r\n\r\n+ Kỳ thi THCB ngày 25/11/2018 sẽ được dời sang chủ nhật tuần sau ngày 02/12/2018 (Ca thi và giờ thi của thí sinh sẽ không thay đổi).\r\n\r\nĐề nghị toàn thể cán bộ - giảng viên - công nhân viên Trung tâm phối hợp thực hiện các biện pháp phòng tránh bão để bảo vệ đơn vị trước các tình hình diễn biến cơn bão.\r\n\r\nTrân trọng.\r\n\r\nNgày đăng: 24-11-2018, NhanLe.', 3, 1, '2018-12-07 00:00:00'),
+(7, 'BGH Trường ĐHSP Thăm Và Tặng Quà Trung Tâm Tin Học Nhân Ngày 20-11', 'h1.jpg', 'BGH Trường ĐHSP thăm và tặng quà Trung tâm Tin học nhân ngày Nhà giáo Việt Nam 20-11', 'Mừng ngày Nhà giáo Việt Nam 20-11, sáng nay PGS.TS.GVCC. Huỳnh Văn Sơn – Phó Hiệu Trưởng nhà trường đã đại diện Ban Giám Hiệu trường Đại học Sư phạm Thành phố Hồ Chí Minh đến Trung tâm Tin học ĐHSP gửi tặng lẵng hoa chúc mừng và gửi lời chúc tốt đẹp nhất đến Ban Giám đốc và toàn thể Cán bộ, Giảng viên của Trung tâm. Chúc toàn thể Cán bộ, Giảng viên vui vẻ, sức khỏe và cộng tác lâu dài với Nhà trường.\r\n\r\n', 3, 1, '2018-12-07 00:00:00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cam_nhan`
+--
+ALTER TABLE `cam_nhan`
+  ADD PRIMARY KEY (`ma_cam_nhan`),
+  ADD KEY `fk_group3` (`ma_khoa_hoc`),
+  ADD KEY `fk_group5` (`ma_nguoi_dung`);
+
+--
+-- Indexes for table `dang_ki`
+--
+ALTER TABLE `dang_ki`
+  ADD PRIMARY KEY (`ma_dk`),
+  ADD KEY `fk_group12` (`ma_lop`),
+  ADD KEY `fk_group13` (`ma_nguoi_dung`);
+
+--
+-- Indexes for table `danh_muc_khoa_hoc`
+--
+ALTER TABLE `danh_muc_khoa_hoc`
+  ADD PRIMARY KEY (`ma_loai`);
+
+--
+-- Indexes for table `danh_muc_tin_tuc`
+--
+ALTER TABLE `danh_muc_tin_tuc`
+  ADD PRIMARY KEY (`ma_danh_muc`);
+
+--
+-- Indexes for table `diem_thi`
+--
+ALTER TABLE `diem_thi`
+  ADD PRIMARY KEY (`ma_diem_thi`),
+  ADD KEY `fk_group8` (`ma_lop`),
+  ADD KEY `fk_group9` (`ma_nguoi_dung`);
+
+--
+-- Indexes for table `giang_vien`
+--
+ALTER TABLE `giang_vien`
+  ADD PRIMARY KEY (`ma_gv`);
+
+--
+-- Indexes for table `khoa_hoc`
+--
+ALTER TABLE `khoa_hoc`
+  ADD PRIMARY KEY (`ma_khoa_hoc`),
+  ADD KEY `fk_khdm` (`ma_loai`);
+
+--
+-- Indexes for table `khuyen_mai`
+--
+ALTER TABLE `khuyen_mai`
+  ADD PRIMARY KEY (`ma_khuyen_mai`);
+
+--
+-- Indexes for table `lien_he`
+--
+ALTER TABLE `lien_he`
+  ADD PRIMARY KEY (`ma_lien_he`);
+
+--
+-- Indexes for table `lop`
+--
+ALTER TABLE `lop`
+  ADD PRIMARY KEY (`ma_lop`),
+  ADD KEY `fk_group1` (`ma_khoa_hoc`),
+  ADD KEY `fk_group2` (`ma_gv`);
+
+--
+-- Indexes for table `nguoi_dung`
+--
+ALTER TABLE `nguoi_dung`
+  ADD PRIMARY KEY (`ma_nguoi_dung`),
+  ADD KEY `fk_group6` (`ma_quyen`);
+
+--
+-- Indexes for table `quyen`
+--
+ALTER TABLE `quyen`
+  ADD PRIMARY KEY (`ma_quyen`);
+
+--
+-- Indexes for table `san_pham_hoc_vien`
+--
+ALTER TABLE `san_pham_hoc_vien`
+  ADD PRIMARY KEY (`ma_sp`),
+  ADD KEY `fk_group10` (`ma_lop`),
+  ADD KEY `fk_group11` (`ma_nguoi_dung`);
+
+--
+-- Indexes for table `tai_lieu`
+--
+ALTER TABLE `tai_lieu`
+  ADD PRIMARY KEY (`ma_tai_lieu`),
+  ADD KEY `fk_group4` (`ma_khoa_hoc`);
+
+--
+-- Indexes for table `thong_bao`
+--
+ALTER TABLE `thong_bao`
+  ADD PRIMARY KEY (`ma_thong_bao`),
+  ADD KEY `fk_group7` (`ma_lop`);
+
+--
+-- Indexes for table `tieu_de`
+--
+ALTER TABLE `tieu_de`
+  ADD PRIMARY KEY (`ma_tieu_de`);
+
+--
+-- Indexes for table `tin_tuc`
+--
+ALTER TABLE `tin_tuc`
+  ADD PRIMARY KEY (`ma_tin_tuc`),
+  ADD KEY `fk_abc` (`ma_danh_muc`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `cam_nhan`
+--
+ALTER TABLE `cam_nhan`
+  MODIFY `ma_cam_nhan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `dang_ki`
+--
+ALTER TABLE `dang_ki`
+  MODIFY `ma_dk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+
+--
+-- AUTO_INCREMENT for table `danh_muc_khoa_hoc`
+--
+ALTER TABLE `danh_muc_khoa_hoc`
+  MODIFY `ma_loai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `danh_muc_tin_tuc`
+--
+ALTER TABLE `danh_muc_tin_tuc`
+  MODIFY `ma_danh_muc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `diem_thi`
+--
+ALTER TABLE `diem_thi`
+  MODIFY `ma_diem_thi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `giang_vien`
+--
+ALTER TABLE `giang_vien`
+  MODIFY `ma_gv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `khoa_hoc`
+--
+ALTER TABLE `khoa_hoc`
+  MODIFY `ma_khoa_hoc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `khuyen_mai`
+--
+ALTER TABLE `khuyen_mai`
+  MODIFY `ma_khuyen_mai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `lien_he`
+--
+ALTER TABLE `lien_he`
+  MODIFY `ma_lien_he` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `lop`
+--
+ALTER TABLE `lop`
+  MODIFY `ma_lop` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `nguoi_dung`
+--
+ALTER TABLE `nguoi_dung`
+  MODIFY `ma_nguoi_dung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `quyen`
+--
+ALTER TABLE `quyen`
+  MODIFY `ma_quyen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `san_pham_hoc_vien`
+--
+ALTER TABLE `san_pham_hoc_vien`
+  MODIFY `ma_sp` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tai_lieu`
+--
+ALTER TABLE `tai_lieu`
+  MODIFY `ma_tai_lieu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `thong_bao`
+--
+ALTER TABLE `thong_bao`
+  MODIFY `ma_thong_bao` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tieu_de`
+--
+ALTER TABLE `tieu_de`
+  MODIFY `ma_tieu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT for table `tin_tuc`
+--
+ALTER TABLE `tin_tuc`
+  MODIFY `ma_tin_tuc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `cam_nhan`
+--
+ALTER TABLE `cam_nhan`
+  ADD CONSTRAINT `fk_group3` FOREIGN KEY (`ma_khoa_hoc`) REFERENCES `khoa_hoc` (`ma_khoa_hoc`),
+  ADD CONSTRAINT `fk_group5` FOREIGN KEY (`ma_nguoi_dung`) REFERENCES `nguoi_dung` (`ma_nguoi_dung`);
+
+--
+-- Constraints for table `dang_ki`
+--
+ALTER TABLE `dang_ki`
+  ADD CONSTRAINT `fk_group12` FOREIGN KEY (`ma_lop`) REFERENCES `lop` (`ma_lop`),
+  ADD CONSTRAINT `fk_group13` FOREIGN KEY (`ma_nguoi_dung`) REFERENCES `nguoi_dung` (`ma_nguoi_dung`);
+
+--
+-- Constraints for table `diem_thi`
+--
+ALTER TABLE `diem_thi`
+  ADD CONSTRAINT `fk_group8` FOREIGN KEY (`ma_lop`) REFERENCES `lop` (`ma_lop`),
+  ADD CONSTRAINT `fk_group9` FOREIGN KEY (`ma_nguoi_dung`) REFERENCES `nguoi_dung` (`ma_nguoi_dung`);
+
+--
+-- Constraints for table `khoa_hoc`
+--
+ALTER TABLE `khoa_hoc`
+  ADD CONSTRAINT `fk_khdm` FOREIGN KEY (`ma_loai`) REFERENCES `danh_muc_khoa_hoc` (`ma_loai`);
+
+--
+-- Constraints for table `lop`
+--
+ALTER TABLE `lop`
+  ADD CONSTRAINT `fk_group1` FOREIGN KEY (`ma_khoa_hoc`) REFERENCES `khoa_hoc` (`ma_khoa_hoc`),
+  ADD CONSTRAINT `fk_group2` FOREIGN KEY (`ma_gv`) REFERENCES `giang_vien` (`ma_gv`);
+
+--
+-- Constraints for table `nguoi_dung`
+--
+ALTER TABLE `nguoi_dung`
+  ADD CONSTRAINT `fk_group6` FOREIGN KEY (`ma_quyen`) REFERENCES `quyen` (`ma_quyen`);
+
+--
+-- Constraints for table `san_pham_hoc_vien`
+--
+ALTER TABLE `san_pham_hoc_vien`
+  ADD CONSTRAINT `fk_group10` FOREIGN KEY (`ma_lop`) REFERENCES `lop` (`ma_lop`),
+  ADD CONSTRAINT `fk_group11` FOREIGN KEY (`ma_nguoi_dung`) REFERENCES `nguoi_dung` (`ma_nguoi_dung`);
+
+--
+-- Constraints for table `tai_lieu`
+--
+ALTER TABLE `tai_lieu`
+  ADD CONSTRAINT `fk_group4` FOREIGN KEY (`ma_khoa_hoc`) REFERENCES `khoa_hoc` (`ma_khoa_hoc`);
+
+--
+-- Constraints for table `thong_bao`
+--
+ALTER TABLE `thong_bao`
+  ADD CONSTRAINT `fk_group7` FOREIGN KEY (`ma_lop`) REFERENCES `lop` (`ma_lop`);
+
+--
+-- Constraints for table `tin_tuc`
+--
+ALTER TABLE `tin_tuc`
+  ADD CONSTRAINT `fk_abc` FOREIGN KEY (`ma_danh_muc`) REFERENCES `danh_muc_tin_tuc` (`ma_danh_muc`);

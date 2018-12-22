@@ -5,7 +5,6 @@ class M_point extends database
 
     public function Read_student_by_idclass($ma_lop)
     {
-
         $sql = "SELECT nd.ma_nguoi_dung,nd.ho_ten FROM nguoi_dung as nd,dang_ki as dk WHERE  nd.ma_quyen = 2 and nd.ma_nguoi_dung = dk.ma_nguoi_dung and dk.ma_lop = $ma_lop  and dk.tinh_trang = 1" ;
         $this->setQuery($sql);
         return $this->loadAllRows();

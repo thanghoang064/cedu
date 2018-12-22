@@ -166,7 +166,6 @@ class C_order{
         $discount  = $_POST['txtDiscount'];
 //        echo $discount;
 //        die();
-
         $customer = \Stripe\Customer::create([
             'email' => $email,
             'source'  => $token,
@@ -195,9 +194,7 @@ class C_order{
             'amount'   => $moneyVND,
             'currency' => 'usd',
         ]);
-
         $ma_dk = null;
-
         $ngay_dk = date('Y-m-d', time());
         $orderItem = $m_oder->addOderCouse($ma_dk, $ngay_dk,$giatien,$ma_lop,$ma_nguoi_dung,1);
         $this->sendMail($ma_nguoi_dung,$ma_lop, 1, $giatien);

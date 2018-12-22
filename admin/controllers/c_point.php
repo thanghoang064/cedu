@@ -122,6 +122,10 @@ class C_point{
                 $ma_lop1 = $ma_lop;
                 $ma_nguoi_dung = $sheetData[$row]['A'];
                 $diem = $sheetData[$row]['C'];
+
+                if(is_numeric($diem) && $diem > 10) $diem = 10;
+                if(!is_numeric(($diem))) $diem = 0;
+
                 $m_point->Insert_point("",$ma_lop1,$diem,$ma_nguoi_dung);
 
             }

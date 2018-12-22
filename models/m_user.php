@@ -11,7 +11,8 @@ class M_user extends database
     }
     function thoat_dang_nhap()
     {
-        session_destroy();
+       // session_destroy();
+        unset( $_SESSION['user']);
         header("location:index.php");
     }
     function luu_dang_nhap($ten,$mk)

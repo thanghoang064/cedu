@@ -182,7 +182,6 @@
             }).success(function(result) {
              //   alert("Thành công");
               //  console.log(result.data);
-
                 if (result.data == 0)
                 {
                     $("#result").show().html("Mã không hợp lệ").css('color', 'red');

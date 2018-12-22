@@ -135,6 +135,7 @@
 <input type="hidden" id="ma_lop" value="<?php echo $_GET['ma_lop'];?>" ?>
 <script>
     $(document).ready(function() {
+
         const ma_lop = $("#ma_lop").val();
         $("#dowload-excel").click(function() {
             $.ajax({

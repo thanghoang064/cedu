@@ -20,18 +20,18 @@ class M_teacher extends database{
         $this->setQuery($sql);
         return $this->loadAllRows();
     }
-    public function  Insert_teacher($ma_gv,$ten_gv,$hinh_gv,$thongtin_gv,$trang_thai)
+    public function  Insert_teacher($ma_gv,$ten_gv,$hinh_gv,$thongtin_gv,$email,$password,$trang_thai)
     {
-        $sql ="insert into giang_vien values(?,?,?,?,?)";
+        $sql ="insert into giang_vien values(?,?,?,?,?,?,?)";
         $this->setQuery($sql);
-        return $this->execute(array("",$ten_gv,$hinh_gv,$thongtin_gv,$trang_thai));
+        return $this->execute(array("",$ten_gv,$hinh_gv,$thongtin_gv,$email,$password,$trang_thai));
     }
 
-    public function  Edit_teacher($ma_gv,$ten_gv,$hinh_gv,$thongtin_gv,$trang_thai)
+    public function  Edit_teacher($ma_gv,$ten_gv,$hinh_gv,$thongtin_gv,$email,$password,$trang_thai)
     {
-        $sql="update giang_vien set ten_gv = ?,hinh_gv=?,thongtin_gv=?,trang_thai=? Where ma_gv=?";
+        $sql="update giang_vien set ten_gv = ?,hinh_gv=?,thongtin_gv=?,email=?,password=?,trang_thai=? Where ma_gv=?";
         $this->setQuery($sql);
-        return $this->execute(array($ten_gv,$hinh_gv,$thongtin_gv,$trang_thai,$ma_gv));
+        return $this->execute(array($ten_gv,$hinh_gv,$thongtin_gv,$email,$password,$trang_thai,$ma_gv));
     }
     public function read_teacher_by_idteacher($ma_gv)
     {
@@ -45,7 +45,18 @@ class M_teacher extends database{
         $this->setQuery($sql);
         return $this->execute(array($ma_gv));
     }
-
+    public function return_user_by_email($email)
+    {
+        $sql = "SELECT COUNT(*) as KQ FROM giang_vien WHERE email = ?";
+        $this->setQuery($sql);
+        return $this->loadRow(array($email));
+    }
+    public function return_user_by_email_edit($email, $id)
+    {
+        $sql = "SELECT COUNT(*) as KQ FROM giang_vien WHERE email = ? and ma_gv <> ?";
+        $this->setQuery($sql);
+        return $this->loadRow(array($email, $id));
+    }
 
 }
 
